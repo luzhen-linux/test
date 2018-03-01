@@ -63,8 +63,10 @@ public:
 #ifdef TEST
 int main()
 {
-	vector<Interval> nums={{1, 3}, {2,8}};
-	Solution::merge(nums);
+	vector<Interval> nums={{1, 3}, {2,8}}, ret;
+	ret = Solution::merge(nums);
+	for (auto c: ret)
+		cout << "start: " << c.start << " end: " << c.end << endl;
 	return 0;
 }
 #endif
