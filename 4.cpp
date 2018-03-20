@@ -55,25 +55,26 @@ public:
 				return 0;
 			return  (n2%2)?B[n2/2]:((double)B[n2/2]+(double)B[n2/2-1])/2;
 		}
+#define A_val(pos)  ((pos<0)?INT_MIN:(pos>=n1)?INT_MAX:A[pos])
+#define B_val(pos)  ((pos<0)?INT_MIN:(pos>=n2)?INT_MAX:B[pos])
 		while (l<=h) {
 			i = (l+h)/2;
 			j = k-i-1;
 			//printf("[%d,%d] i=%d, j=%d\n", l, h, i, j);
-			if (i<n1 && j>=0) {
-				if (A[i] < B[j])
-					l = i+1;
-			}
-			else if (i>=n1) 
-			else if (i>1 && B[j+1] < A[i-1])
+			if (i<n1 && A[i] < B[j])
+				l = i+1;
+			else if (i>0 && B[j+1] < A[i-1])
 				h = i-1;
 			else {
-				if ((n1+n2)%2)
-					return i>1?max(A[i-1],B[j]):i<n1?B[j]:A[i-1];
-				else  {
-					double median=((i>1?max(A[i-1],B[j]):B[j])+(j>n2-2)?A[i]:(i<n1?min(A[i],B[j+1]):B[j+1]));
+				//printf("[%d,%d] [%d,%d]\n", A_val(i-1), A_val(i), B_val(j), B_val(j+1));
+				if (!((n1+n2)%2)) {
+					double median = max(A_val(i-1),B_val(j))+min(A_val(i),B_val(j+1));
 					return median/2;
 				}
-				break;
+				//else if (i<1 || j<0)
+				//return min(A_val(i),B_val(j+1));
+				else
+					return max(A_val(i-1),B_val(j));
 			}
 		}
 		return 0;
@@ -97,11 +98,15 @@ public:
 #ifdef TEST
 int main()
 {
-	vector<int> nums1 = {1,2}, nums2 = {3,4};
+	vector<int> nums1 = {4,5}, nums2 = {1,2,3};
+	//vector<int> nums1 = {1,2}, nums2 = {3};
+	//vector<int> nums1 = {1,2}, nums2 = {3,4};
 	//vector<int> nums1 = {1}, nums2 = {1};
 	//vector<int> nums1 = {2,3}, nums2 = {};
 	//vector<int> nums1 = {1}, nums2 = {};
 	//vector<int> nums1 = {1,3}, nums2 = {2};
+	//vector<int> nums1 = {1,2,3,4,5}, nums2 = {6,7,8,9};
+	//vector<int> nums1 = {1,2,3,4}, nums2 = {5,6,7,8,9};
 	//vector<int> nums1 = {1,3,5,7,9}, nums2 = {2,4,6,8};
 	double ret = Solution::findMedianSortedArrays(nums1, nums2);
 	cout << ret << endl;
