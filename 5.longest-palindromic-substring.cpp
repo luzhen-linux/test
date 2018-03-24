@@ -46,16 +46,38 @@ using namespace std;
 
 #endif
 
+//  #b#a#a#b#d#
+//  01234567890
+
 class Solution {
 public:
-    string longestPalindrome(string s) {
+    static string longestPalindrome(string s) {
+		int mlen=0, start, n=s.size();
+
+		for (int i=0; i<2*n+1; i++) {
+			int len=(i%2), j=2-!(i%2);
+			for (; i>=j && i<=2*n-j && s.at((i-j)/2)==s.at((i+j)/2); j+=2) {
+				len+=2;
+				//printf("i=%d, j=%d, len=%d,  [%d]%c vs [%d]%c\n", i, j, len,
+						//(i-j)/2, s.at((i-j)/2), (i+j)/2, s.at((i+j)/2));
+			}
+			//printf("i=%d, j=%d\n", i, j);
+			if (len>mlen) {
+				mlen = len;
+				start = (i-mlen)/2;
+				//printf("%d:  %d,%d, %s\n", __LINE__, start, mlen, s.substr(start, mlen).c_str());
+			}
+		}
         
+		return s.substr(start, mlen);
     }
 };
 
 #ifdef TEST
 int main()
 {
+	string str("cbbd");
+	cout << Solution::longestPalindrome(str) << endl;
 	return 0;
 }
 #endif
