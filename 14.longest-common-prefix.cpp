@@ -26,14 +26,32 @@ using namespace std;
 class Solution {
 public:
     static string longestCommonPrefix(vector<string>& strs) {
-        
-    }
+		int size = strs.size();
+		if (size<1) return "";
+		if (size<2) return strs[0];
+
+		int min_sz=INT_MAX;
+		for (int i=0; i<strs.size(); i++) {
+			int sz = strs[i].size();
+			min_sz = min(min_sz, sz);
+		}
+		string first=strs[0];
+		for (int j=0; j<min_sz; j++) {
+			for (int i=0; i<strs.size(); i++) {
+				if (strs[i].at(j)!=first.at(j)) {
+					printf("[%d,%d] %c, %c\n", i, j, strs[i].at(j), first.at(j));
+					return first.substr(0,j);
+				}
+			}
+		}
+		return first.substr(0, min_sz);
+	}
 };
 
 #ifdef TEST
 int main()
 {
-	vector<string> str;
+	vector<string> str = {"aaa", "aa", "a"};
 	cout << Solution::longestCommonPrefix(str) << endl;
 	return 0;
 }
