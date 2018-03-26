@@ -43,6 +43,7 @@ public:
 				start = max(num[ch], start);
 			else
 				maximum = max(maximum, i-start);
+			//printf("%d, start=%d, longest=%d\n", i, start, maximum);
 			num[ch] = i;
 		}
 		return maximum;
@@ -52,7 +53,8 @@ public:
 #ifdef TEST
 int main()
 {
-	string str="pwwkew";
+	//string str="pwwkew";
+	string str="abcabcbb";
 	int ret = Solution::lengthOfLongestSubstring(str);
 	cout << ret << endl;
 	return 0;

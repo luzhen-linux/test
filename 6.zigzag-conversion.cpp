@@ -91,8 +91,9 @@ public:
 #ifdef TEST
 int main()
 {
-	string str("ABC");
-	cout << Solution::convert(str, 2) << endl;
+	string str("PAYPALISHIRING"), ret;
+	ret = Solution::convert(str, 3);
+	cout << ret << endl;
 	return 0;
 }
 #endif
