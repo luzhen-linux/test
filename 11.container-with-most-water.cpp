@@ -32,14 +32,29 @@ using namespace std;
 class Solution {
 public:
     static int maxArea(vector<int>& height) {
-        
+		int maxarea=0;
+		int size = height.size();
+		int l=0, r=size-1;
+		while (l<r) {
+			int hl=height[l], hr=height[r], width=r-l, shortline;
+			if (hl>hr) {
+				while (height[--r]<hr && r>=0);
+				shortline = hr;
+			}
+			else {
+				while (height[++l]<hl && l<size);
+				shortline = hl;
+			}
+			maxarea = max(maxarea, shortline*width);
+		}
+		return maxarea;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums;
+	vector<int> nums={1,2,3,4,5,4,3,2,1};
 	cout << Solution::maxArea(nums) << endl;
 	return 0;
 }
