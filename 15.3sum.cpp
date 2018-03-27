@@ -38,14 +38,19 @@ using namespace std;
 class Solution {
 public:
     static vector<vector<int>> threeSum(vector<int>& nums) {
-        
+		vector<vector<int>> ret;
+		std::sort(nums.begin(), nums.end());
+		for (auto i:nums)
+			cout << i << ", ";
+		cout << endl;
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums;
+	vector<int> nums = {-1, 0, 1, 2, -1, -4};
 	Solution::threeSum(nums);
 	return 0;
 }
