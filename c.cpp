@@ -4,6 +4,7 @@
 #include <list>
 #include <cctype>
 #include <algorithm>
+#include <strings.h>
  
 using namespace std;
 
@@ -13,7 +14,7 @@ int main()
 	{
 		"aa.com", "Ab.com",
 	};
-	string name = "ab.com";
+	string name = "ac.com";
 	/*
 	sort(begin(myvector), end(myvector), [](string const &a, string const &b)
 	{
@@ -25,10 +26,10 @@ int main()
 	*/
 	for(string &s : myvector)
 	{
-		transform(s.begin(), s.end(), s.begin(), [](char c){ return tolower(c); });
 		cout << s << endl;
 	}
-	auto it = find(myvector.begin(), myvector.end(), name/*, [](string const &a, string const &b){return strcasecmp(a.c_str(), b.c_str()); }*/);
+	auto it = find_if(myvector.begin(), myvector.end(), [name](string &a){cout << "compare " << a << " and " << name << endl;
+			return !::strcasecmp(a.c_str(), name.c_str()); });
 	if (myvector.end()==it)
 		cout << "not found" << endl;
 	else
