@@ -33,4 +33,13 @@ int main()
 		cout << "not found" << endl;
 	else
 		cout << "found" << endl;
+	vector<string> str {"a", "b"};
+	for (string &s: str) {
+		cout << s << endl;
+		str.push_back("c");
+	}
+	cout << "next:" << endl;
+	for (string &s: str) {
+		cout << s << endl;
+	}
 }
