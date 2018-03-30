@@ -38,20 +38,31 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x, ListNode *n) : val(x), next(n) {}
 };
 #endif
 
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        
+    static ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+		ListNode *ret=l1;
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
+    ListNode l1_3(4,NULL), l1_2=(2,l1_3), l1_1=(1,l1_2);
+    ListNode l2_3(4,NULL), l2_2=(3,l2_3), l2_1=(1,l2_2);
+	ListNode *ret = Solution::mergeTwoLists(&l1_1, &l2_1);
+	while (ret) {
+		cout << ret->val;
+		ret = ret->next;
+		if (ret)
+			cout << "->";
+	}
+	cout << endl;
 	return 0;
 }
 #endif

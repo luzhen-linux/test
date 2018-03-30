@@ -19,6 +19,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <stack>
 #include <algorithm>
 #include <iostream>
 
@@ -28,15 +29,27 @@ using namespace std;
 
 class Solution {
 public:
-    bool isValid(string s) {
-        
+    static bool isValid(string s) {
+		map <char, char> m={{'{', '}'},{'(', ')'},{'[', ']'}} ;
+		stack<char> stack;
+		for (auto c:s) {
+			char ch=m[c];
+			if (ch)
+				stack.push(ch);
+			else if (!stack.empty() && stack.top()==c)
+				stack.pop();
+			else
+				return false;
+		}
+		return stack.empty()?true:false;
     }
 };
 
 #ifdef TEST
 int main()
 {
+	string str("]");
+	cout << Solution::isValid(str) << endl;
 	return 0;
 }
 #endif
-
