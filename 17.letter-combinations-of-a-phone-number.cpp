@@ -40,6 +40,7 @@ using namespace std;
 
 #endif
 
+#define SOLUTION1 1
 class Solution {
 public:
 	static vector<string> letterCombinations(string digits) {
@@ -56,15 +57,16 @@ public:
 			{'w',  'x',  'y',  'z'  }  //9
 		};
 		vector<string> result;
-
 		int size = digits.size();
 		if (!size)
 			return  result;
+
+#ifdef SOLUTION1
 		result.push_back("");
 		for (int i=0; i<size; i++) {
 			char digit=digits.at(i);
 			if (digit<'0' || digit>'9')
-				continue;
+				break;
 			vector<string> ret;
 			for (int j=0; j<4; j++) {
 				char ch=phone[digit-'0'][j];
@@ -74,8 +76,18 @@ public:
 					ret.push_back(s+ch);
 				}
 			}
-			result = ret;
+			result.swap(ret);
 		}
+#elif SOLUTION2
+		int total = pow(size,4);
+		char *tmps=calloc(total, 1);
+		if (!tmps) return result;
+		for (int i=0; i<size; i++) {
+			char digit=digits.at(i);
+			if (digit<'0' || digit>'9')
+				break;
+		}
+#endif
 		return result;
 	}
 };
