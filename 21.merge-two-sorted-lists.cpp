@@ -38,23 +38,52 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x, ListNode *n) : val(x), next(n) {}
+    ListNode(int x) : val(x), next(NULL) {}
 };
 #endif
 
 class Solution {
 public:
     static ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-		ListNode *ret=l1;
-		return ret;
+		ListNode *head, *prev;
+		if (!l1) return l2;
+		if (!l2) return l1;
+		if (l1->val>l2->val) {
+			prev = head = l2;
+			l2 = l2->next;
+		}
+		else {
+			prev = head = l1;
+			l1 = l1->next;
+		}
+		while (l1&&l2) {
+			ListNode *next;
+			if (l1->val>l2->val) {
+				next = l2;
+				l2 = l2->next;
+			}
+			else {
+				next = l1;
+				l1 = l1->next;
+			}
+			prev->next = next;
+			prev = next;
+		}
+		if (l1)
+			prev->next = l1;
+		if (l2)
+			prev->next = l2;
+		return head;
     }
 };
 
 #ifdef TEST
 int main()
 {
-    ListNode l1_3(4,NULL), l1_2=(2,l1_3), l1_1=(1,l1_2);
-    ListNode l2_3(4,NULL), l2_2=(3,l2_3), l2_1=(1,l2_2);
+    ListNode l1_3(4), l1_2=(2), l1_1=(1);
+    ListNode l2_3(4), l2_2=(3), l2_1=(1);
+	l1_2.next = &l1_3; l1_1.next = &l1_2;
+	l2_2.next = &l2_3; l2_1.next = &l2_2;
 	ListNode *ret = Solution::mergeTwoLists(&l1_1, &l2_1);
 	while (ret) {
 		cout << ret->val;
@@ -66,4 +95,3 @@ int main()
 	return 0;
 }
 #endif
-

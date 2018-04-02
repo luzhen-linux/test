@@ -40,21 +40,22 @@ using namespace std;
 
 #endif
 
+static char phone[10][4]={ 
+	{' ',  '\0', '\0', '\0' }, //0
+	{'\0', '\0', '\0', '\0' }, //1
+	{'a',  'b',  'c',  '\0' }, //2
+	{'d',  'e',  'f',  '\0' }, //3
+	{'g',  'h',  'i',  '\0' }, //4
+	{'j',  'k',  'l',  '\0' }, //5
+	{'m',  'n',  'o',  '\0' }, //6
+	{'p',  'q',  'r',  's'  }, //7
+	{'t',  'u',  'v',  '\0' }, //8
+	{'w',  'x',  'y',  'z'  }, //9
+};
+#define SOLUTION2 1
 class Solution {
 public:
 	static vector<string> letterCombinations(string digits) {
-		char  phone[10][4]={ 
-			{' ',  '\0', '\0', '\0' }, //0
-			{'\0', '\0', '\0', '\0' }, //1
-			{'a',  'b',  'c',  '\0' }, //2
-			{'d',  'e',  'f',  '\0' }, //3
-			{'g',  'h',  'i',  '\0' }, //4
-			{'j',  'k',  'l',  '\0' }, //5
-			{'m',  'n',  'o',  '\0' }, //6
-			{'p',  'q',  'r',  's'  }, //7
-			{'t',  'u',  'v',  '\0' }, //8
-			{'w',  'x',  'y',  'z'  }  //9
-		};
 		vector<string> result;
 
 		int size = digits.size();
@@ -67,7 +68,7 @@ public:
 				continue;
 			vector<string> ret;
 			for (int j=0; j<4; j++) {
-				char ch=phone[digit-'0'][j];
+				char ch=::phone[digit-'0'][j];
 				if (!ch)
 					break;
 				for (auto s:result) {
