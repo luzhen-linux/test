@@ -40,14 +40,35 @@ using namespace std;
 
 class Solution {
 public:
-    void nextPermutation(vector<int>& nums) {
-        
+    static void nextPermutation(vector<int>& nums) {
+		int size=nums.size();
+		for (int i=size-1; i>0; i--)
+			if (nums[i]>nums[i-1]) {
+				int low=i, high=size-1;
+				while (low<high) {
+					int mid = low + (high-low)/2;
+					if (nums[mid]>=nums[i])
+						high = mid;
+					else
+						low = mid+1;
+					iter_swap(nums.begin()+i, nums.begin()+i-1);
+				}
+				return;
+			}
+		return;
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={1,2,3};
+	for (int i=0; i<6; i++) {
+		Solution::nextPermutation(nums);
+		for (auto i:nums)
+			cout << i << ", ";
+		cout << endl;
+	}
 	return 0;
 }
 #endif
