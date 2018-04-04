@@ -15,10 +15,10 @@
 22.generate-parentheses.cpp
 23.merge-k-sorted-lists.cpp
 29.divide-two-integers.cpp
+31.next-permutation.cpp
 
 ======================================
 
-31.next-permutation.cpp
 33.search-in-rotated-sorted-array.cpp
 38.count-and-say.cpp
 39.combination-sum.cpp
