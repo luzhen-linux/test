@@ -31,14 +31,37 @@ using namespace std;
 
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
-        
+    static int search(vector<int>& nums, int target) {
+		int size = nums.size();
+		int lo=0, hi=size-1;
+		while (lo<=hi) {
+			int mid = lo + (hi-lo)/2;
+			//printf("%d,%d,%d  %d,%d,%d\n", lo, mid, hi, nums[lo], nums[mid], nums[hi]);
+			if (nums[mid]==target)
+				return mid;
+			else if (nums[mid]>target) {
+				if (nums[lo]<=target || nums[lo]>nums[mid])
+					hi = mid -1;
+				else
+					lo = mid +1;
+			}
+			else if (nums[mid]<target) {
+				if (nums[hi]>=target || nums[hi]<nums[mid])
+					lo = mid +1;
+				else
+					hi = mid -1;
+			}
+		}
+		return -1;
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector <int> nums = {4,5,6,7,8,1,2,3};
+	int target = 8;
+	cout << Solution::search(nums, target) << endl;
 	return 0;
 }
 #endif

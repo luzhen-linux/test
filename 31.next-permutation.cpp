@@ -45,16 +45,27 @@ public:
 		for (int i=size-1; i>0; i--)
 			if (nums[i]>nums[i-1]) {
 				int low=i, high=size-1;
-				while (low<high) {
+				int sz_tmp = high-i+1;
+				if (nums[high]>nums[i-1]) {
+					iter_swap(nums.begin()+i-1, nums.begin()+high);
+					for (int j=0; j<sz_tmp/2; j++) 
+						iter_swap(nums.begin()+i+j, nums.end()-j-1);
+					return;
+				}
+				while (low<=high) {
 					int mid = low + (high-low)/2;
-					if (nums[mid]>=nums[i])
-						high = mid;
+					if (nums[mid]<=nums[i-1])
+						high = mid-1;
 					else
 						low = mid+1;
-					iter_swap(nums.begin()+i, nums.begin()+i-1);
 				}
+				iter_swap(nums.begin()+i-1, nums.begin()+high);
+				for (int j=0; j<sz_tmp/2; j++) 
+					iter_swap(nums.begin()+i+j, nums.end()-j-1);
 				return;
 			}
+		for (int i=0; i<size/2; i++) 
+			iter_swap(nums.begin()+i, nums.end()-i-1);
 		return;
     }
 };
@@ -62,8 +73,9 @@ public:
 #ifdef TEST
 int main()
 {
-	vector<int> nums={1,2,3};
-	for (int i=0; i<6; i++) {
+	vector<int> nums={2,2,7,5,4,3,2,2,1};
+	//vector<int> nums={1,2,3,4};
+	for (int i=0; i<24; i++) {
 		Solution::nextPermutation(nums);
 		for (auto i:nums)
 			cout << i << ", ";
