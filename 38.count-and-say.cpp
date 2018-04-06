@@ -60,15 +60,40 @@ using namespace std;
 
 class Solution {
 public:
-    string countAndSay(int n) {
-        
-    }
+    static string countAndSay(int n) {
+		if (n<=0)
+			return to_string(0);
+		string ret = to_string(1);
+		for (int i=1; i<n; i++) {
+			string tmp;
+			int sz = ret.size(), count=0;
+			char cur = '\0';
+			for (char c:ret)  {
+				if (cur==c)
+					count++;
+				else {
+					if (cur) {
+						tmp += to_string(count);
+						tmp += cur;
+					}
+					cur = c;
+					count = 1;
+				}
+			}
+			if (cur) {
+				tmp += to_string(count);
+				tmp += cur;
+			}
+			ret = tmp;
+		}
+		return ret;
+	}
 };
 
 #ifdef TEST
 int main()
 {
+	cout << Solution::countAndSay(6) << endl;
 	return 0;
 }
 #endif
-

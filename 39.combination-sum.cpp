@@ -48,15 +48,26 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        
+    static vector<vector<int>> combinationSum(vector<int>& can, int target) {
+		vector<vector<int>> ret;
+		std::sort(can.begin(), can.end());
+		ret.push_back(can);
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> candidates={2, 3, 6, 7};
+	int target=7;
+    vector<vector<int>> ret;
+	ret = Solution::combinationSum(candidates, target);
+	for (auto one:ret) {
+		for (auto i:one)
+			cout << i << ", ";
+		cout << endl;
+	}
 	return 0;
 }
 #endif
-
