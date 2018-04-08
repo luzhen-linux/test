@@ -34,7 +34,7 @@ using namespace std;
 
 class Solution {
 public:
-    string multiply(string num1, string num2) {
+    static string multiply(string num1, string num2) {
         
     }
 };
@@ -42,6 +42,7 @@ public:
 #ifdef TEST
 int main()
 {
+	cout << Solution::multiply("123", "456") << endl;;
 	return 0;
 }
 #endif

@@ -40,7 +40,7 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+    static vector<int> spiralOrder(vector<vector<int>>& matrix) {
         
     }
 };
@@ -48,7 +48,11 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<vector<int>> matrix = {{1,2,3},{4,5,6},{7,8,9}};
+	vector <int> ret = Solution::spiralOrder(matrix);
+	for (auto i:ret)
+		cout << i << ", ";
+	cout << endl;
 	return 0;
 }
 #endif
-

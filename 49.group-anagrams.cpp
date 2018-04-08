@@ -35,7 +35,7 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    static vector<vector<string>> groupAnagrams(vector<string>& strs) {
         
     }
 };
@@ -43,7 +43,13 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+	vector<vector<string>> ret = Solution::groupAnagrams(strs);
+	for (auto one:ret) {
+		for (auto s:one)
+			cout << s << ", ";
+		cout << endl;
+	}
 	return 0;
 }
 #endif
-
