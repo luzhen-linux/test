@@ -35,7 +35,12 @@ using namespace std;
 class Solution {
 public:
     static string multiply(string num1, string num2) {
-        
+		string ret;
+		int sz_num1 = num1.size(), sz_num2 = num2.size();
+		vector<int> d(sz_num1+sz_num2+2);
+		for (int i=sz_num2-1; i>=0; i--)
+			for (int j=sz_num1-1; j>=0; j--) {
+			}
     }
 };
 
