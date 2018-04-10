@@ -38,15 +38,16 @@ using namespace std;
 
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
-        
+    static int maxSubArray(vector<int>& nums) {
+
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums = {-2,1,-3,4,-1,2,1,-5,4};
+	cout << Solution::maxSubArray(nums) << endl;
 	return 0;
 }
 #endif
-

@@ -47,20 +47,47 @@ using namespace std;
 #endif
 
 class Solution {
-public:
-    static vector<vector<int>> combinationSum(vector<int>& can, int target) {
-		vector<vector<int>> ret;
-		std::sort(can.begin(), can.end());
-		ret.push_back(can);
-		return ret;
-    }
+	public:
+		static int addNumber (vector<int> &can, vector<int> num, int remain, vector<vector<int>> &ret) {
+			int sz_num = num.size();
+			if (remain==0) {
+				vector<int> tmp;
+				for (int i=0; i<sz_num; i++) {
+					for (int j=0; j<num[i]; j++)
+						tmp.push_back(can[i]);
+				}
+				ret.push_back(tmp);
+				return 0;
+			}
+			if (remain>=can[sz_num-1]) {
+				num[sz_num-1]++;
+				addNumber(can, num, remain-can[sz_num-1], ret);
+				num[sz_num-1]--;
+			}
+			else
+				return 2;
+			if (sz_num<can.size()) {
+				num.push_back(0);
+				addNumber(can, num, remain, ret);
+			}
+			return 1;
+		}
+		static vector<vector<int>> combinationSum(vector<int>& can, int target) {
+			vector<vector<int>> ret;
+			if (can.size()==0)
+				return ret;
+			vector<int> num = {0};
+			sort(can.begin(), can.end());
+			addNumber(can, num, target, ret);
+			return ret;
+		}
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> candidates={2, 3, 6, 7};
-	int target=7;
+	vector<int> candidates={8,7,4,3};
+	int target=11;
     vector<vector<int>> ret;
 	ret = Solution::combinationSum(candidates, target);
 	for (auto one:ret) {

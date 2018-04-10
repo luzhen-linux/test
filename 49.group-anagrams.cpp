@@ -35,15 +35,41 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        
+    static vector<vector<string>> groupAnagrams(vector<string>& strs) {
+		vector<vector<string>> ret;
+		for (auto str: strs) {
+			int found = 0;
+			string sorted = str;
+			sort(sorted.begin(), sorted.end());
+			for (auto &one: ret) {
+				if (sorted==one[0]) {
+					one.push_back(str);
+					found = 1;
+					break;
+				}
+			}
+			if (!found) {
+				vector<string> tmp {sorted, str};
+				ret.push_back(tmp);
+			}
+		}
+		for (auto &one:ret) {
+			one.erase(one.begin());
+		}
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+	vector<vector<string>> ret = Solution::groupAnagrams(strs);
+	for (auto one:ret) {
+		for (auto s:one)
+			cout << s << ", ";
+		cout << endl;
+	}
 	return 0;
 }
 #endif
-
