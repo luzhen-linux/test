@@ -55,7 +55,7 @@ using namespace std;
 
 class Solution {
 public:
-    int climbStairs(int n) {
+    static int climbStairs(int n) {
         
     }
 };
@@ -63,6 +63,7 @@ public:
 #ifdef TEST
 int main()
 {
+	cout << Solution::climbStairs(3) << endl;
 	return 0;
 }
 #endif

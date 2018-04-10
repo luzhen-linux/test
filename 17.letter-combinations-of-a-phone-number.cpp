@@ -40,9 +40,6 @@ using namespace std;
 
 #endif
 
-<<<<<<< HEAD
-#define SOLUTION1 1
-=======
 static char phone[10][4]={ 
 	{' ',  '\0', '\0', '\0' }, //0
 	{'\0', '\0', '\0', '\0' }, //1
@@ -56,7 +53,6 @@ static char phone[10][4]={
 	{'w',  'x',  'y',  'z'  }, //9
 };
 #define SOLUTION2 1
->>>>>>> c1fd131d8d1b13ec0f076b487cc957d8695281f1
 class Solution {
 public:
 	static vector<string> letterCombinations(string digits) {
@@ -84,7 +80,7 @@ public:
 		}
 #elif SOLUTION2
 		int total = pow(size,4);
-		char *tmps=calloc(total, 1);
+		char *tmps=(char*)calloc(total, 1);
 		if (!tmps) return result;
 		for (int i=0; i<size; i++) {
 			char digit=digits.at(i);

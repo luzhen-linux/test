@@ -41,7 +41,7 @@ using namespace std;
 
 class Solution {
 public:
-    bool canJump(vector<int>& nums) {
+    static bool canJump(vector<int>& nums) {
         
     }
 };
@@ -49,6 +49,9 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums = {2,3,1,1,4};
+	//vector<int> nums = {3,2,1,0,4};
+	cout << Solution::canJump(nums) << endl;
 	return 0;
 }
 #endif

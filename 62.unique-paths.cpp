@@ -37,7 +37,7 @@ using namespace std;
 
 class Solution {
 public:
-    int uniquePaths(int m, int n) {
+    static int uniquePaths(int m, int n) {
         
     }
 };
@@ -45,7 +45,7 @@ public:
 #ifdef TEST
 int main()
 {
+	cout << Solution::uniquePaths(3,7) << endl;
 	return 0;
 }
 #endif
-

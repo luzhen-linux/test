@@ -36,7 +36,7 @@ using namespace std;
 
 class Solution {
 public:
-    int minDistance(string word1, string word2) {
+    static int minDistance(string word1, string word2) {
         
     }
 };
@@ -44,7 +44,9 @@ public:
 #ifdef TEST
 int main()
 {
+	string word1("hello");
+	string word2("word");
+	cout << Solution::minDistance(word1, word2) << endl;
 	return 0;
 }
 #endif
-

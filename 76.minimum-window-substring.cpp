@@ -45,7 +45,7 @@ using namespace std;
 
 class Solution {
 public:
-    string minWindow(string s, string t) {
+    static string minWindow(string s, string t) {
         
     }
 };
@@ -53,7 +53,9 @@ public:
 #ifdef TEST
 int main()
 {
+	string s("ADOBECODEBANC");
+	string t("ABC");
+	cout << Solution::minWindow(s, t) << endl;
 	return 0;
 }
 #endif
-
