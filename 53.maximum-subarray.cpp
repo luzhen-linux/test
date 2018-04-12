@@ -31,16 +31,39 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
 #endif
 
+#define SOLUTION2 1
 class Solution {
 public:
-    static int maxSubArray(vector<int>& nums) {
-
-    }
+	static int maxSubArray(vector<int>& nums) {
+#if SOLUTION1
+		int size=nums.size();
+		int max=INT_MIN, sum=0;
+		for (int i=0; i<size; i++) {
+			if (sum+nums[i]<=0) {
+				sum=0;
+				max = nums[i]>max?nums[i]:max;
+			}
+			else {
+				sum += nums[i];
+				max = sum>max?sum:max;
+			}
+		}
+		return max;
+#elif SOLUTION2
+		int preMax = nums[0], curMax = nums[0];
+		for (int i = 1; i < nums.size(); i++){
+			preMax = max(nums[i], preMax + nums[i]);
+			curMax = max(preMax, curMax);
+		}
+		return curMax;
+#endif
+	}
 };
 
 #ifdef TEST
