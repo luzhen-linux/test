@@ -38,7 +38,11 @@ using namespace std;
 class Solution {
 public:
     static int uniquePaths(int m, int n) {
-        
+		static int steps[101][101];
+		if (steps[m][n]) return steps[m][n];
+		if (m==1||n==1) return 1;
+		steps[m][n] = uniquePaths(m-1, n)+uniquePaths(m, n-1);
+		return steps[m][n];
     }
 };
 

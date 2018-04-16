@@ -42,15 +42,26 @@ using namespace std;
 class Solution {
 public:
     static bool canJump(vector<int>& nums) {
-        
+		int size=nums.size();
+		if (size<=1)
+			return true;
+		int reach=nums[0];
+		for (int i=0; i<reach+1; i++) {
+			if (reach>=size-1)
+				return true;
+			reach = max(i+nums[i], reach);
+			printf("reach %d\n", reach);
+		}
+		return false;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums = {2,3,1,1,4};
+	//vector<int> nums = {2,3,1,1,4};
 	//vector<int> nums = {3,2,1,0,4};
+	vector<int> nums = {1,2,3};
 	cout << Solution::canJump(nums) << endl;
 	return 0;
 }

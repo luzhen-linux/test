@@ -44,19 +44,34 @@ struct Interval {
 
 class Solution {
 public:
-    static vector<Interval> merge(vector<Interval>& intervals) {
-        
-    }
+	static vector<Interval> merge(vector<Interval>& intervals) {
+		int size = intervals.size();
+		if (!size)
+			return {};
+
+		sort(intervals.begin(), intervals.end(),
+				[](Interval &a, Interval &b){return a.start<b.start;});
+
+		vector<Interval> ret;
+		ret.push_back(intervals[0]);
+		for (int i = 1; i < intervals.size(); i++)
+		{
+			if (intervals[i].start <= ret.back().end)
+				ret.back().end = max(ret.back().end, intervals[i].end);
+			else
+				ret.push_back(intervals[i]);
+		}
+		return ret;
+	}
 };
 
 #ifdef TEST
 int main()
 {
-	vector<Interval> nums={{1, 3}, {2,8}}, ret;
+	vector<Interval> nums={{1,3},{2,6},{8,10},{15,18}}, ret;
 	ret = Solution::merge(nums);
 	for (auto c: ret)
 		cout << "start: " << c.start << " end: " << c.end << endl;
 	return 0;
 }
 #endif
-

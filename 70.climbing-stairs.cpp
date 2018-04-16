@@ -56,14 +56,17 @@ using namespace std;
 class Solution {
 public:
     static int climbStairs(int n) {
-        
+		static int ways[1000] = {1,1};
+		if (ways[n]) return ways[n];
+		ways[n] = climbStairs(n-1)+climbStairs(n-2);
+		return ways[n];
     }
 };
 
 #ifdef TEST
 int main()
 {
-	cout << Solution::climbStairs(3) << endl;
+	cout << Solution::climbStairs(38) << endl;
 	return 0;
 }
 #endif
