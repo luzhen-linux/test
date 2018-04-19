@@ -37,7 +37,39 @@ using namespace std;
 class Solution {
 public:
     static int minDistance(string word1, string word2) {
-        
+		map<char, vector<int>> map1;
+		map<char, int> count;
+		int i=0;
+		for (auto c: word1) {
+			map1[c].push_back(i++);
+			count[c]++;
+		}
+		char prevch;
+		int prev=-1;
+		int common=0;
+		map<int, int> path;
+		i=-1;
+		for (auto c: word2) {
+			i++;
+			if (!count[c])
+				continue;
+			int sz_ch = map1[c].size();
+			int cur = map1[c][sz_ch-count[c]];
+			if (cur>prev) {
+				common++;
+				count[c]--;
+			}
+			else {
+				path.erase(prev);
+				count[prevch]++;
+			}
+			path[cur] = i;
+			prev=cur;
+			prevch = c;
+		}
+		for (auto c: path)
+			cout << c.first << " <=> " << c.second << endl;
+		return max(word1.size(), word2.size())-common;
     }
 };
 
@@ -45,7 +77,7 @@ public:
 int main()
 {
 	string word1("hello");
-	string word2("word");
+	string word2("wold");
 	cout << Solution::minDistance(word1, word2) << endl;
 	return 0;
 }
