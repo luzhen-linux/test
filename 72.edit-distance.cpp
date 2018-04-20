@@ -36,7 +36,8 @@ using namespace std;
 
 class Solution {
 public:
-    static int minDistance(string word1, string word2) {
+	static int minDistance(string word1, string word2) {
+#if 0
 		map<char, vector<int>> map1;
 		map<char, int> count;
 		int i=0;
@@ -46,18 +47,21 @@ public:
 		}
 		char prevch;
 		int prev=-1;
-		int common=0;
+		int common=0, distance=0;
 		map<int, int> path;
 		i=-1;
 		for (auto c: word2) {
 			i++;
-			if (!count[c])
+			if (!count[c]) { // 1. not found
+				distance++;
 				continue;
+			}
 			int sz_ch = map1[c].size();
 			int cur = map1[c][sz_ch-count[c]];
-			if (cur>prev) {
+			if (cur>prev) {  // 2. close to the end;
 				common++;
 				count[c]--;
+				distance--;
 			}
 			else {
 				path.erase(prev);
@@ -70,7 +74,24 @@ public:
 		for (auto c: path)
 			cout << c.first << " <=> " << c.second << endl;
 		return max(word1.size(), word2.size())-common;
-    }
+#endif
+		int m = word1.length(), n = word2.length();
+		vector<int> cur(m + 1, 0);
+		for (int i = 1; i <= m; i++)
+			cur[i] = i;
+		for (int j = 1; j <= n; j++) {
+			int pre = cur[0];
+			cur[0] = j;
+			for (int i = 1; i <= m; i++) {
+				int temp = cur[i];
+				if (word1[i - 1] == word2[j - 1])
+					cur[i] = pre;
+				else cur[i] = min(pre + 1, min(cur[i] + 1, cur[i - 1] + 1));
+				pre = temp;
+			}
+		}
+		return cur[m]; 
+	}
 };
 
 #ifdef TEST
