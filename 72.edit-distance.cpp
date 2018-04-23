@@ -34,10 +34,11 @@ using namespace std;
 
 #endif
 
+#define SOLUTION1 1
 class Solution {
 public:
 	static int minDistance(string word1, string word2) {
-#if 0
+#if SOLUTION1
 		map<char, vector<int>> map1;
 		map<char, int> count;
 		int i=0;
@@ -45,23 +46,39 @@ public:
 			map1[c].push_back(i++);
 			count[c]++;
 		}
+//   h e l l o
+// w 1 2 3 4 5
+// o 2 2 3 4 4
+// l 3 3 2 3 4
+// d 4 4 3 3 4
+// 
+//   h e l l o
+// w 1 2 3 4 5
+// o 2 2 3 4 4
+// r 3 3 3 4 5
+// l 4 4 3 3 4
+// d 5 5 4 4 4
+//
 		char prevch;
 		int prev=-1;
-		int common=0, distance=0;
+		int common=0;
 		map<int, int> path;
 		i=-1;
 		for (auto c: word2) {
 			i++;
 			if (!count[c]) { // 1. not found
-				distance++;
 				continue;
 			}
 			int sz_ch = map1[c].size();
 			int cur = map1[c][sz_ch-count[c]];
+			printf("c=%c, cur=%d, prev=%d\n", c, cur, prev);
+			cout << "c=" << c << ": ";
+			for (auto m:map1[c])
+				cout << m << ", ";
+			cout << endl;
 			if (cur>prev) {  // 2. close to the end;
 				common++;
 				count[c]--;
-				distance--;
 			}
 			else {
 				path.erase(prev);
@@ -71,10 +88,9 @@ public:
 			prev=cur;
 			prevch = c;
 		}
-		for (auto c: path)
-			cout << c.first << " <=> " << c.second << endl;
+		for (auto c: path) cout << c.first << " <=> " << c.second << endl;
 		return max(word1.size(), word2.size())-common;
-#endif
+#elif SOLUTION2
 		int m = word1.length(), n = word2.length();
 		vector<int> cur(m + 1, 0);
 		for (int i = 1; i <= m; i++)
@@ -91,14 +107,16 @@ public:
 			}
 		}
 		return cur[m]; 
+#endif
 	}
 };
 
 #ifdef TEST
 int main()
 {
-	string word1("hello");
-	string word2("wold");
+	string word1("intention");
+	string word2("execution");
+	cout << word1 << endl << word2 << endl;
 	cout << Solution::minDistance(word1, word2) << endl;
 	return 0;
 }
