@@ -45,26 +45,28 @@ using namespace std;
 
 #endif
 
+#define SOLUTION1 1
 class Solution {
 	public:
 		static string minWindow(string S, string T) {
-#if 0
-			int sz_s = s.size();
-			int sz_t = t.size();
+#ifdef SOLUTION1
+			int sz_s = S.size();
+			int sz_t = T.size();
 			if (!sz_t || !sz_s || sz_t>sz_s)
 				return "";
 			map<char, vector<int>> map_t;
 			int i=0;
-			for (auto c: t) {
+			for (auto c: T) {
 				map_t[c].push_back(i++);
 			}
 			map<char, vector<int>> map_c=map_t;
 			struct status {
 				int pos;
-				int next, nextidx;
-				int previdx;
-			} st[sz_t]={};
-			//vector<struct status> st(sz_t);
+				int next;
+				int nextidx=-1;
+				int previdx=-1;
+			};
+			vector<struct status> st(sz_t);
 			int win_len=-1, win_start=-1, win_end=-1;
 			int count=0, maxpos=sz_s-1, minpos=0, prev_idx=-1;
 			i = 0;
@@ -73,12 +75,12 @@ class Solution {
 				st[j].previdx=-1;
 			}
 
-			for (auto c: s) {
+			for (auto c: S) {
 				int idx=-1;
 				if (map_t.count(c)) {
 					if (!map_c[c].empty()) {
 						if (sz_t==1)
-							return t;
+							return T;
 						idx = map_c[c].front();
 						map_c[c].erase(map_c[c].begin());
 						count++;
@@ -94,7 +96,7 @@ class Solution {
 					}
 					st[idx].pos = i;
 					if (count>=sz_t) {
-						//printf("c=%c, idx=%d, i=%d, next=%d\n", c, idx, i, st[idx].next);
+						printf("**** c=%c, idx=%d, i=%d, next=%d\n", c, idx, i, st[idx].next);
 						if (win_end<0) {
 							win_start = INT_MAX;
 							for (int j=0; j<sz_t; j++) {
@@ -103,12 +105,18 @@ class Solution {
 							win_end = i;
 							win_len = i-win_start;
 						}
-						else if (st[idx].previdx!=-1)
+						else if (st[idx].previdx!=-1) {
+							st[st[idx].previdx].nextidx = st[idx].nextidx==-1?idx:st[idx].nextidx;
 							st[st[idx].previdx].next = st[idx].next==-1?i:st[idx].next;
-						else if (st[idx].next!=-1 && i-st[idx].next<win_len) {
-							win_len = i-st[idx].next;
-							win_start = st[idx].next;
-							win_end = i;
+						}
+						else {
+							if (st[idx].next!=-1 && i-st[idx].next<win_len) {
+								win_len = i-st[idx].next;
+								win_start = st[idx].next;
+								win_end = i;
+							}
+							if (st[idx].nextidx!=-1)
+								st[st[idx].nextidx].previdx = -1;
 						}
 					}
 					else {
@@ -123,8 +131,7 @@ class Solution {
 						st[prev_idx].nextidx = idx;
 					}
 					prev_idx=idx;
-					if (st[idx].nextidx!=-1)
-						st[st[idx].nextidx].previdx = -1;
+					printf("c=%c, idx=%d, i=%d, %d,%d,%d,%d\n", c, idx, i, st[idx].pos, st[idx].next, st[idx].nextidx, st[idx].previdx);
 					st[idx].next = -1;
 					st[idx].nextidx = -1;
 				}
@@ -132,8 +139,9 @@ class Solution {
 			}
 			if (win_start<0)
 				return "";
-			return s.substr(win_start, win_len+1);
-#endif
+			printf("%d,%d,%d\n", win_start, win_end, win_len);
+			return S.substr(win_start, win_len+1);
+#elif SOLUTION2
 			string win;
 			if (S.size()<=0 || T.size()<=0 || T.size() > S.size()) return win;
 			/*
@@ -199,15 +207,17 @@ class Solution {
 				win = S.substr(start, winSize);
 			}
 			return win;
+#endif
 		}
 };
 
 #ifdef TEST
 int main()
 {
-	string s("ADOBECODEBANC");
-	string t("ABC");
+	string s("abcabdebac");
+	string t("cea");
 	cout << s << endl;
+	cout << t << endl;
 	cout << Solution::minWindow(s, t) << endl;
 	return 0;
 }

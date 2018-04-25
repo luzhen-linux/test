@@ -50,7 +50,7 @@ public:
 			return {};
 
 		sort(intervals.begin(), intervals.end(),
-				[](Interval &a, Interval &b){return a.start<b.start;});
+				[](const Interval &a, const Interval &b){return a.start<b.start;});
 
 		vector<Interval> ret;
 		ret.push_back(intervals[0]);
