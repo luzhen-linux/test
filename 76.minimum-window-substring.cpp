@@ -96,14 +96,20 @@ class Solution {
 					}
 					st[idx].pos = i;
 					if (count>=sz_t) {
-						printf("**** c=%c, idx=%d, i=%d, next=%d\n", c, idx, i, st[idx].next);
+						printf("**** %c, win_start=%d, win_end=%d, st[%d].previdx=%d, i=%d, next=%d\n", c,
+								win_start, win_end, idx, st[idx].previdx, i, st[idx].next);
 						if (win_end<0) {
 							win_start = INT_MAX;
+							int startidx=-1;
 							for (int j=0; j<sz_t; j++) {
-								win_start = min(win_start, st[j].pos);
+								if (win_start>st[j].pos) {
+									win_start = st[j].pos;
+									startidx=j;
+								}
 							}
 							win_end = i;
 							win_len = i-win_start;
+							st[startidx].previdx = -1;
 						}
 						else if (st[idx].previdx!=-1) {
 							st[st[idx].previdx].nextidx = st[idx].nextidx==-1?idx:st[idx].nextidx;
@@ -131,7 +137,7 @@ class Solution {
 						st[prev_idx].nextidx = idx;
 					}
 					prev_idx=idx;
-					printf("c=%c, idx=%d, i=%d, %d,%d,%d,%d\n", c, idx, i, st[idx].pos, st[idx].next, st[idx].nextidx, st[idx].previdx);
+					printf("'%c', idx=%d, i=%d, %d,%d,%d,%d\n", c, idx, i, st[idx].pos, st[idx].next, st[idx].nextidx, st[idx].previdx);
 					st[idx].next = -1;
 					st[idx].nextidx = -1;
 				}
@@ -214,8 +220,12 @@ class Solution {
 #ifdef TEST
 int main()
 {
+	/*
 	string s("abcabdebac");
 	string t("cea");
+	*/
+	string s("ask_not_what_your_country_can_do_for_you_ask_what_you_can_do_for_your_country");
+	string t("ask_country");
 	cout << s << endl;
 	cout << t << endl;
 	cout << Solution::minWindow(s, t) << endl;
