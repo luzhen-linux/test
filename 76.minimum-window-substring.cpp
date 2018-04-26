@@ -44,8 +44,9 @@
 using namespace std;
 
 #endif
+#define DEBUG 0
 
-#define SOLUTION1 1
+#define SOLUTION2 1
 class Solution {
 	public:
 		static string minWindow(string S, string T) {
@@ -67,7 +68,7 @@ class Solution {
 				int previdx=-1;
 			};
 			vector<struct status> st(sz_t);
-			int win_len=-1, win_start=-1, win_end=-1;
+			int win_len=-1, win_start=-1, win_end=-1, cur_start;
 			int count=0, maxpos=sz_s-1, minpos=0, prev_idx=-1;
 			i = 0;
 			for (int j=0; j<sz_t; j++) {
@@ -96,8 +97,6 @@ class Solution {
 					}
 					st[idx].pos = i;
 					if (count>=sz_t) {
-						printf("**** %c, win_start=%d, win_end=%d, st[%d].previdx=%d, i=%d, next=%d\n", c,
-								win_start, win_end, idx, st[idx].previdx, i, st[idx].next);
 						if (win_end<0) {
 							win_start = INT_MAX;
 							int startidx=-1;
@@ -110,10 +109,17 @@ class Solution {
 							win_end = i;
 							win_len = i-win_start;
 							st[startidx].previdx = -1;
+							cur_start = win_start;
 						}
 						else if (st[idx].previdx!=-1) {
-							st[st[idx].previdx].nextidx = st[idx].nextidx==-1?idx:st[idx].nextidx;
+							int nidx;
+							nidx = st[st[idx].previdx].nextidx = st[idx].nextidx==-1?idx:st[idx].nextidx;
 							st[st[idx].previdx].next = st[idx].next==-1?i:st[idx].next;
+							st[nidx].previdx = st[idx].previdx;
+#if DEBUG
+							printf("\t%c<->%c, idx=%d, next: %d,%d\n",T[st[idx].previdx],
+								   	T[nidx], st[idx].previdx, nidx, st[st[idx].previdx].next);
+#endif
 						}
 						else {
 							if (st[idx].next!=-1 && i-st[idx].next<win_len) {
@@ -121,23 +127,55 @@ class Solution {
 								win_start = st[idx].next;
 								win_end = i;
 							}
-							if (st[idx].nextidx!=-1)
+							if (st[idx].nextidx!=-1) {
+#if DEBUG
+								printf("\t%c, idx=%d, reset previdx %d\n", T[st[idx].nextidx],
+										st[idx].nextidx, st[st[idx].nextidx].previdx);
+#endif
 								st[st[idx].nextidx].previdx = -1;
+								cur_start = st[st[idx].nextidx].pos;
+							}
 						}
+#if DEBUG
+						cout << S.substr(0, i+1) << endl << S.substr(win_start, win_len+1)
+							<< endl << S.substr(cur_start, i-cur_start+1) << endl;
+#endif
 					}
 					else {
 						if (st[idx].previdx!=-1) {
-							st[st[idx].previdx].nextidx = st[idx].nextidx==-1?idx:st[idx].nextidx;
+							int nidx;
+							nidx = st[st[idx].previdx].nextidx = st[idx].nextidx==-1?idx:st[idx].nextidx;
 							st[st[idx].previdx].next = st[idx].next==-1?i:st[idx].next;
+							st[nidx].previdx = st[idx].previdx;
+#if DEBUG
+							printf("\t%c<->%c, idx=%d, next2: %d,%d\n",T[st[idx].previdx],
+								   	T[nidx], st[idx].previdx, nidx, st[st[idx].previdx].next);
+#endif
+						}
+						else if (st[idx].nextidx!=-1) {
+#if DEBUG
+							printf("\t%c, idx=%d, reset previdx2 %d\n",T[st[idx].nextidx], st[idx].nextidx,
+									st[st[idx].nextidx].previdx);
+#endif
+							st[st[idx].nextidx].previdx = -1;
 						}
 					}
-					st[idx].previdx = prev_idx;
-					if (prev_idx!=-1) {
-						st[prev_idx].next = i;
-						st[prev_idx].nextidx = idx;
+					if (idx!=prev_idx) {
+						st[idx].previdx = prev_idx;
+						if (prev_idx!=-1) {
+							st[prev_idx].next = i;
+							st[prev_idx].nextidx = idx;
+#if DEBUG
+							printf("\t%c->%c, idx=%d, next3: %d,%d\n",T[prev_idx],
+									T[idx], prev_idx, st[prev_idx].nextidx, st[prev_idx].next);
+#endif
+						}
 					}
 					prev_idx=idx;
-					printf("'%c', idx=%d, i=%d, %d,%d,%d,%d\n", c, idx, i, st[idx].pos, st[idx].next, st[idx].nextidx, st[idx].previdx);
+#if DEBUG
+					printf("'%c', idx=%d, i=%d, %d,%d,%d,%d\n", c, idx, i, st[idx].pos,
+							st[idx].next, st[idx].nextidx, st[idx].previdx);
+#endif
 					st[idx].next = -1;
 					st[idx].nextidx = -1;
 				}
@@ -145,7 +183,7 @@ class Solution {
 			}
 			if (win_start<0)
 				return "";
-			printf("%d,%d,%d\n", win_start, win_end, win_len);
+			//printf("%d,%d,%d\n", win_start, win_end, win_len);
 			return S.substr(win_start, win_len+1);
 #elif SOLUTION2
 			string win;
@@ -223,6 +261,8 @@ int main()
 	/*
 	string s("abcabdebac");
 	string t("cea");
+	string s("baaaabab");
+	string t("abb");
 	*/
 	string s("ask_not_what_your_country_can_do_for_you_ask_what_you_can_do_for_your_country");
 	string t("ask_country");
