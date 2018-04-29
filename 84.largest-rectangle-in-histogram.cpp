@@ -38,6 +38,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -45,14 +46,36 @@ using namespace std;
 
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) {
-        
-    }
+	static int largestRectangleArea(vector<int>& heights) {
+		int size=heights.size(), end=size-1, maxarea=0;
+		int min=INT_MAX, pos=0;
+		if (size<=0) return 0;
+		if (size==1) return heights[0];
+		for (int i=0; i<=end; i++)
+			if (min>heights[i]) {
+				pos = i;
+				min = heights[i];
+			}
+		vector<int> subset;
+		maxarea=size*min;
+		subset.assign(heights.begin(), heights.begin()+pos);
+		maxarea = max(maxarea, largestRectangleArea(subset));
+		//printf("pos=%d, min=%d\n", pos, min);
+		subset.assign(heights.begin()+pos+1, heights.end());
+		maxarea = max(maxarea, largestRectangleArea(subset));
+		//printf("end-pos=%d, min=%d\n", end-pos, min);
+		return maxarea;
+	}
 };
 
 #ifdef TEST
 int main()
 {
+	//vector<int> heights = {2,1,5,6,2,3};
+	//vector<int> heights = {1};
+	//vector<int> heights = {0,0,0,0,0,0,0,0,2147483647};
+	vector<int> heights = {2,0,1,0,1,0};
+	cout << Solution::largestRectangleArea(heights) << endl;
 	return 0;
 }
 #endif

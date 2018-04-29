@@ -48,7 +48,7 @@ using namespace std;
 
 class Solution {
 public:
-    int numDecodings(string s) {
+    static int numDecodings(string s) {
         
     }
 };
@@ -56,6 +56,8 @@ public:
 #ifdef TEST
 int main()
 {
+	string s("12");
+	cout << Solution::numDecodings(s) << endl;
 	return 0;
 }
 #endif
