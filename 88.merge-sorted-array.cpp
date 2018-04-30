@@ -30,7 +30,7 @@ using namespace std;
 
 class Solution {
 public:
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+    static void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
         
     }
 };
@@ -38,7 +38,12 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums1 = {1,3,5};
+	vector<int> nums2 = {2,4,6};
+	Solution::merge(nums1, nums1.size(), nums2, nums2.size());
+	for (auto s:nums1)
+		cout << s << ", ";
+	cout << endl;
 	return 0;
 }
 #endif
-
