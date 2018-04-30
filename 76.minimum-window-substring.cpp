@@ -118,7 +118,7 @@ class Solution {
 							st[nidx].previdx = st[idx].previdx;
 #if DEBUG
 							printf("\t%c<->%c, idx=%d, next: %d,%d\n",T[st[idx].previdx],
-								   	T[nidx], st[idx].previdx, nidx, st[st[idx].previdx].next);
+									T[nidx], st[idx].previdx, nidx, st[st[idx].previdx].next);
 #endif
 						}
 						else {
@@ -149,7 +149,7 @@ class Solution {
 							st[nidx].previdx = st[idx].previdx;
 #if DEBUG
 							printf("\t%c<->%c, idx=%d, next2: %d,%d\n",T[st[idx].previdx],
-								   	T[nidx], st[idx].previdx, nidx, st[st[idx].previdx].next);
+									T[nidx], st[idx].previdx, nidx, st[st[idx].previdx].next);
 #endif
 						}
 						else if (st[idx].nextidx!=-1) {
@@ -251,6 +251,39 @@ class Solution {
 				win = S.substr(start, winSize);
 			}
 			return win;
+#elif SOLUTION3
+			if(s.empty()) {
+				return "";
+			}
+
+			vector<int> map(128, 0);
+			int count = 0;
+			for (auto & c : t) {
+				map[c]++;
+				count++;
+			}
+
+			int start = 0, end = 0, head = 0, d = INT_MAX;
+
+			while(end < s.size()) {
+				if (map[s[end++]]-- > 0) {
+					count--;
+				}
+
+				while (count == 0) {
+					if (end - start < d) {
+						d = end - start;
+						head = start;
+					}
+					if(map[s[start++]]++ >= 0) {
+						count++;
+					}
+				}
+
+			}
+
+			return d != INT_MAX ? s.substr(head, d) : "";
+
 #endif
 		}
 };
