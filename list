@@ -31,10 +31,10 @@
 70.climbing-stairs.cpp
 72.edit-distance.cpp
 76.minimum-window-substring.cpp
+84.largest-rectangle-in-histogram.cpp
 
 ======================================
 
-84.largest-rectangle-in-histogram.cpp
 88.merge-sorted-array.cpp
 91.decode-ways.cpp
 94.binary-tree-inorder-traversal.cpp
