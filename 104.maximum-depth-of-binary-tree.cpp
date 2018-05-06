@@ -54,15 +54,21 @@ struct TreeNode {
 
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
-        
+    static int maxDepth(TreeNode* root) {
+		int ret;
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
+    vector<TreeNode> node{3,9,20,15,7};
+	node[0].left = &node[1];
+	node[0].right = &node[2];
+	node[2].left = &node[3];
+	node[2].right = &node[4];
+    cout << Solution::maxDepth (&node[0]) << endl;
 	return 0;
 }
 #endif
-

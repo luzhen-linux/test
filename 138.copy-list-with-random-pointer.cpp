@@ -43,7 +43,7 @@ struct RandomListNode {
 
 class Solution {
 public:
-    RandomListNode *copyRandomList(RandomListNode *head) {
+    static RandomListNode *copyRandomList(RandomListNode *head) {
         
     }
 };
@@ -51,7 +51,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<RandomListNode> node{3,4,5};
+	RandomListNode *ret = Solution::copyRandomList(&node[0]);
 	return 0;
 }
 #endif
-

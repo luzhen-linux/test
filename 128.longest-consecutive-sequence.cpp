@@ -35,7 +35,7 @@ using namespace std;
 
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
+    static int longestConsecutive(vector<int>& nums) {
         
     }
 };
@@ -43,6 +43,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums = {100, 4, 200, 1, 3, 2};
+	cout << Solution::longestConsecutive(nums) << endl;
 	return 0;
 }
 #endif

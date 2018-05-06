@@ -81,7 +81,7 @@ struct UndirectedGraphNode {
 
 class Solution {
 public:
-    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+    static UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
         
     }
 };
@@ -89,7 +89,12 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<UndirectedGraphNode> node{0,1,2};
+	node[0].neighbors.push_back(&node[1]);
+	node[0].neighbors.push_back(&node[2]);
+	node[1].neighbors.push_back(&node[2]);
+	node[2].neighbors.push_back(&node[2]);
+    UndirectedGraphNode *ret = Solution::cloneGraph(&node[0]);
 	return 0;
 }
 #endif
-

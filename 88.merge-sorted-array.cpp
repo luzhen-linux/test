@@ -31,16 +31,27 @@ using namespace std;
 class Solution {
 public:
     static void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        
+		int pos1=m-1, pos2=n-1, cur=m+n-1;
+		while (pos1>=0 || pos2>=0) {
+			if (pos2<0)
+				return;
+			else if (pos1<0 || nums2[pos2]>=nums1[pos1])
+				nums1[cur--] = nums2[pos2--];
+			else 
+				nums1[cur--] = nums1[pos1--];
+		}
+		return;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums1 = {1,3,5};
-	vector<int> nums2 = {2,4,6};
-	Solution::merge(nums1, nums1.size(), nums2, nums2.size());
+	vector<int> nums1 = {2,0};
+	vector<int> nums2 = {1};
+	//nums1[0] = 1; nums1[1] = 3; nums1[2] = 5;
+	nums1.resize(10);
+	Solution::merge(nums1, 1, nums2, 1);
 	for (auto s:nums1)
 		cout << s << ", ";
 	cout << endl;

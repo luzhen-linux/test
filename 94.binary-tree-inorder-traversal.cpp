@@ -55,15 +55,21 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode* root) {
-        
+    static vector<int> inorderTraversal(TreeNode* root) {
+		vector<int> ret;
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
+    vector<TreeNode> node{1,2,3};
+	node[0].right = &node[1];
+	node[1].left = &node[2];
+	vector<int> ret = Solution::inorderTraversal(&node[0]);
+	for (auto iter:ret)
+		cout << iter << endl;
 	return 0;
 }
 #endif
-

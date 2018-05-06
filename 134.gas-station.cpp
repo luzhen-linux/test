@@ -42,7 +42,7 @@ using namespace std;
 
 class Solution {
 public:
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+    static int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         
     }
 };
@@ -50,7 +50,9 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> gas{4};
+	vector<int> cost{5};
+	cout << Solution::canCompleteCircuit(gas, cost) << endl;
 	return 0;
 }
 #endif
-

@@ -57,15 +57,26 @@ struct TreeNode {
 
 class Solution {
 public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    static TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         
     }
 };
 
 #ifdef TEST
+void pr_node(TreeNode *node)
+{
+	if (!node) return;
+	pr_node(node->left);
+	cout << node->val << endl;
+	pr_node(node->right);
+}
+
 int main()
 {
+	vector<int> preorder = {3,9,20,15,7};
+	vector<int> inorder = {9,3,15,20,7};
+    TreeNode* ret = Solution::buildTree(preorder, inorder);
+	pr_node(ret);
 	return 0;
 }
 #endif
-

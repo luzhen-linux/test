@@ -49,7 +49,8 @@ using namespace std;
 class Solution {
 public:
     static int numDecodings(string s) {
-        
+		int ret;
+		return ret;
     }
 };
 

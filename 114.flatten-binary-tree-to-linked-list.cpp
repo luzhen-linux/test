@@ -74,15 +74,30 @@ struct TreeNode {
 
 class Solution {
 public:
-    void flatten(TreeNode* root) {
+    static void flatten(TreeNode* root) {
         
     }
 };
 
 #ifdef TEST
+void pr_node(TreeNode *node)
+{
+	if (!node) return;
+	pr_node(node->left);
+	cout << node->val << endl;
+	pr_node(node->right);
+}
+
 int main()
 {
+    vector<TreeNode> node{1,2,3,4,5,6};
+	node[0].left = &node[1];
+	node[0].right = &node[4];
+	node[1].left = &node[2];
+	node[1].right = &node[3];
+	node[4].right = &node[5];
+	Solution::flatten (&node[0]);
+	pr_node(&node[0]);
 	return 0;
 }
 #endif
-

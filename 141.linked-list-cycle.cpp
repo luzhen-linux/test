@@ -43,7 +43,7 @@ struct ListNode {
 
 class Solution {
 public:
-    bool hasCycle(ListNode *head) {
+    static bool hasCycle(ListNode *head) {
         
     }
 };
@@ -51,6 +51,9 @@ public:
 #ifdef TEST
 int main()
 {
+    ListNode l1_3(4), l1_2=(2), l1_1=(1);
+	l1_2.next = &l1_3; l1_1.next = &l1_2;
+	cout << Solution::hasCycle(&l1_1) << endl;
 	return 0;
 }
 #endif

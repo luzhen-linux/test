@@ -62,14 +62,26 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        
+    static vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+		vector<vector<int>> ret;
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
+    vector<TreeNode> node{3,9,20,15,7};
+	node[0].left = &node[1];
+	node[0].right = &node[2];
+	node[2].left = &node[3];
+	node[2].right = &node[4];
+    vector<vector<int>> ret = Solution::zigzagLevelOrder (&node[0]);
+	for (auto one:ret) {
+		for (auto iter:one)
+			cout << iter << " ,";
+		cout << endl;
+	}
 	return 0;
 }
 #endif

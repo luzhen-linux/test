@@ -32,10 +32,11 @@
 72.edit-distance.cpp
 76.minimum-window-substring.cpp
 84.largest-rectangle-in-histogram.cpp
-
-======================================
-
 88.merge-sorted-array.cpp
+169.majority-element.cpp
+
+================= 1 ====================
+
 91.decode-ways.cpp
 94.binary-tree-inorder-traversal.cpp
 102.binary-tree-level-order-traversal.cpp
@@ -50,7 +51,7 @@
 128.longest-consecutive-sequence.cpp
 133.clone-graph.cpp
 
-======================================
+================= 2 ====================
 
 134.gas-station.cpp
 138.copy-list-with-random-pointer.cpp
@@ -65,7 +66,9 @@
 162.find-peak-element.cpp
 166.fraction-to-recurring-decimal.cpp
 169.majority-element.0.cpp
-169.majority-element.cpp
+
+================= 3 ====================
+
 171.excel-sheet-column-number.cpp
 172.factorial-trailing-zeroes.cpp
 174.dungeon-game.cpp
@@ -79,6 +82,9 @@
 208.implement-trie-prefix-tree.cpp
 210.course-schedule-ii.cpp
 213.house-robber-ii.cpp
+
+================= 4 ====================
+
 215.kth-largest-element-in-an-array.cpp
 217.contains-duplicate.cpp
 218.the-skyline-problem.cpp
@@ -92,6 +98,9 @@
 239.sliding-window-maximum.cpp
 287.find-the-duplicate-number.cpp
 289.game-of-life.cpp
+
+================= 5 ====================
+
 295.find-median-from-data-stream.cpp
 300.longest-increasing-subsequence.cpp
 315.count-of-smaller-numbers-after-self.cpp
@@ -105,6 +114,9 @@
 350.intersection-of-two-arrays-ii.cpp
 371.sum-of-two-integers.cpp
 378.kth-smallest-element-in-a-sorted-matrix.cpp
+
+================= 6 ====================
+
 380.insert-delete-getrandom-o1.cpp
 382.linked-list-random-node.cpp
 384.shuffle-an-array.cpp

@@ -47,7 +47,7 @@ using namespace std;
 
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
+    static int maxProfit(vector<int>& prices) {
         
     }
 };
@@ -55,6 +55,9 @@ public:
 #ifdef TEST
 int main()
 {
+	//vector<int> input = {7, 1, 5, 3, 6, 4};
+	vector<int> input = {7, 6, 4, 3, 1};
+	cout << Solution::maxProfit(input);
 	return 0;
 }
 #endif

@@ -61,15 +61,25 @@ struct TreeNode {
 
 class Solution {
 public:
-    TreeNode* sortedArrayToBST(vector<int>& nums) {
+    static TreeNode* sortedArrayToBST(vector<int>& nums) {
         
     }
 };
 
 #ifdef TEST
+void pr_node(TreeNode *node)
+{
+	if (!node) return;
+	pr_node(node->left);
+	cout << node->val << endl;
+	pr_node(node->right);
+}
+
 int main()
 {
+	vector<int> nums = {-10,-3,0,5,9};
+    TreeNode* ret = Solution::sortedArrayToBST(nums);
+	pr_node(ret);
 	return 0;
 }
 #endif
-
