@@ -49,8 +49,27 @@ using namespace std;
 class Solution {
 public:
     static int numDecodings(string s) {
-		int ret;
-		return ret;
+		int count=1, size=s.size();
+		char right=0;
+		if (size==0)
+			return 0;
+		for (int i=size-1; i>=0; i--) {
+			char ch=s[i];
+			char left=i>0?s[i-1]:0;
+			if (ch=='0') {
+				if (left!='1'&&left!='2')
+					return 0;
+				i--;
+				continue;
+			}
+			if (left=='1')
+				count++;
+			else if (left=='2') {
+				if (ch<'7')
+					count++;
+			}
+		}
+		return count;
     }
 };
 
