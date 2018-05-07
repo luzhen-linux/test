@@ -49,25 +49,23 @@ using namespace std;
 class Solution {
 public:
     static int numDecodings(string s) {
-		int count=1, size=s.size();
+		int count=1, prev=1, size=s.size();
 		char right=0;
 		if (size==0)
 			return 0;
 		for (int i=size-1; i>=0; i--) {
 			char ch=s[i];
 			char left=i>0?s[i-1]:0;
+			int save=count;
 			if (ch=='0') {
 				if (left!='1'&&left!='2')
 					return 0;
 				i--;
 				continue;
 			}
-			if (left=='1')
-				count++;
-			else if (left=='2') {
-				if (ch<'7')
-					count++;
-			}
+			if (left=='1' || (left=='2' && ch<'7' && ch>'0'))
+				count += prev;
+			prev = save;
 		}
 		return count;
     }
@@ -76,7 +74,8 @@ public:
 #ifdef TEST
 int main()
 {
-	string s("12");
+	string s("1212121212");
+	//string s("4110");
 	cout << Solution::numDecodings(s) << endl;
 	return 0;
 }
