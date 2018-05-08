@@ -59,6 +59,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <queue>
 #include <algorithm>
 #include <iostream>
 
@@ -75,7 +76,26 @@ struct TreeNode {
 class Solution {
 public:
     static void flatten(TreeNode* root) {
-        
+		queue<TreeNode*> queue;
+		if (!root) return;
+		queue.push(root);
+		while (!queue.empty()) {
+			TreeNode *node = queue.front();
+			queue.pop();
+			TreeNode *orig_right = node->right;
+			if (node->left) {
+				queue.push(node->left);
+				node->right = node->left;
+				TreeNode *insert = node->left;
+				while (insert->right)
+					insert = insert->right;
+				insert->right = orig_right;
+				node->left = NULL;
+			}
+			else if (node->right)
+				queue.push(node->right);
+		}
+		return;
     }
 };
 

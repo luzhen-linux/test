@@ -61,8 +61,24 @@ struct TreeNode {
 
 class Solution {
 public:
+    static TreeNode* sortedArrayToBST(vector<int>& nums, int start, int end) {
+		if (end<=start)
+			return NULL;
+		int mid = start + (end-start)/2;
+		TreeNode *ret = new TreeNode(nums[mid]);
+		if(!ret)
+			return NULL;
+		if (mid>start)
+			ret->left = sortedArrayToBST(nums, start, mid);
+		if (end>mid)
+			ret->right = sortedArrayToBST(nums, mid+1, end);
+		return ret;
+	}
     static TreeNode* sortedArrayToBST(vector<int>& nums) {
-        
+		int sz_nums = nums.size();
+		if (!sz_nums)
+			return NULL;
+		return sortedArrayToBST(nums, 0, sz_nums);
     }
 };
 

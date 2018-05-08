@@ -40,6 +40,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -48,17 +49,26 @@ using namespace std;
 class Solution {
 public:
     static int maxProfit(vector<int>& prices) {
-        
+		int min = INT_MAX, diff=0;
+		for (auto i:prices) {
+			if (min<i)
+				diff = max(diff, i-min);
+			else
+				min = i;
+		}
+		return diff;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	//vector<int> input = {7, 1, 5, 3, 6, 4};
-	vector<int> input = {7, 6, 4, 3, 1};
-	cout << Solution::maxProfit(input);
+	vector<vector<int>> input = {
+		{7, 1, 5, 3, 6, 4},
+		{7, 6, 4, 3, 1},
+	};
+	for (auto i:input)
+		cout << Solution::maxProfit(i) << endl;
 	return 0;
 }
 #endif
-

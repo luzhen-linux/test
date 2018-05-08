@@ -39,6 +39,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <queue>
 #include <algorithm>
 #include <iostream>
 
@@ -52,11 +53,36 @@ struct TreeNode {
 };
 #endif
 
+#define SOLUTION2 1
 class Solution {
 public:
     static int maxDepth(TreeNode* root) {
-		int ret;
-		return ret;
+#if SOLUTION1
+		return root?max(maxDepth(root->left), maxDepth(root->right))+1:0;
+#elif SOLUTION2
+		int maxdepth = 0;
+		queue<TreeNode*> qnode;
+		queue<int> level;
+		if (!root)
+			return 0;
+		qnode.push(root);
+		level.push(1);
+		while (!qnode.empty()) {
+			TreeNode *front = qnode.front();
+			maxdepth = max(level.front(), maxdepth);
+			if (front->left) {
+				qnode.push(front->left);
+				level.push(level.front()+1);
+			}
+			if (front->right) {
+				qnode.push(front->right);
+				level.push(level.front()+1);
+			}
+			qnode.pop();
+			level.pop();
+		}
+		return maxdepth;
+#endif
     }
 };
 

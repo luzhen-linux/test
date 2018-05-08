@@ -47,6 +47,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <queue>
 #include <algorithm>
 #include <iostream>
 
@@ -64,6 +65,35 @@ class Solution {
 public:
     static vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
 		vector<vector<int>> ret;
+		vector<int> one;
+		vector<TreeNode*> vnode;
+		vector<TreeNode*> vbackup;
+		int backward = 0;
+		if (!root)
+			return ret;
+		vnode.push_back(root);
+		while (1) {
+			if (vnode.empty()) {
+				ret.push_back(one);
+				one.clear();
+				if (vbackup.empty())
+					return ret;
+				vnode.swap(vbackup);
+			}
+			if (backward)
+				for (int i=vnode.size()-1; i>=0; i--)
+					one.push_back(vnode[i]->val);
+			for (auto n:vnode) {
+				if (!backward)
+					one.push_back(n->val);
+				if (n->left)
+					vbackup.push_back(n->left);
+				if (n->right)
+					vbackup.push_back(n->right);
+			}
+			vnode.clear();
+			backward = !backward;
+		}
 		return ret;
     }
 };
