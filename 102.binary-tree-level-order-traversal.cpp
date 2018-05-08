@@ -46,6 +46,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <queue>
 #include <algorithm>
 #include <iostream>
 
@@ -63,6 +64,29 @@ class Solution {
 public:
     static vector<vector<int>> levelOrder(TreeNode* root) {
 		vector<vector<int>> ret;
+		if (!root)
+			return ret;
+		vector<int> one;
+		queue<TreeNode*>  qnode;
+		queue<TreeNode*>  qnode2;
+		qnode.push(root);
+		while (1) {
+			if (qnode.empty()) {
+				ret.push_back(one);
+				one.clear();
+				if (qnode2.empty())
+					return ret;
+				qnode.swap(qnode2);
+				continue;
+			}
+			TreeNode *tmp = qnode.front();
+			qnode.pop();
+			one.push_back(tmp->val);
+			if (tmp->left)
+				qnode2.push(tmp->left);
+			if (tmp->right)
+				qnode2.push(tmp->right);
+		}
 		return ret;
     }
 };

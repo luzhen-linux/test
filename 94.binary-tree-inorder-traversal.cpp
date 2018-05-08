@@ -40,6 +40,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <stack>
 #include <algorithm>
 #include <iostream>
 
@@ -57,6 +58,27 @@ class Solution {
 public:
     static vector<int> inorderTraversal(TreeNode* root) {
 		vector<int> ret;
+		stack<TreeNode*> stack_node;
+		TreeNode *iter=root;
+		int skip_left=0;
+		while (iter) {
+			if (!skip_left && iter->left) {
+				stack_node.push(iter);
+				iter = iter->left;
+				continue;
+			}
+			ret.push_back(iter->val);
+			if (iter->right) {
+				skip_left = 0;
+				iter = iter->right;
+				continue;
+			}
+			if (stack_node.empty())
+				return ret;
+			iter = stack_node.top();
+			stack_node.pop();
+			skip_left = 1;
+		}
 		return ret;
     }
 };
