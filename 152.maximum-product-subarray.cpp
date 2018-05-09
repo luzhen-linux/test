@@ -31,7 +31,7 @@ using namespace std;
 
 class Solution {
 public:
-    int maxProduct(vector<int>& nums) {
+    static int maxProduct(vector<int>& nums) {
         
     }
 };
@@ -39,6 +39,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums={2,3,-2,4};
+	cout << Solution::maxProduct(nums) << endl;
 	return 0;
 }
 #endif

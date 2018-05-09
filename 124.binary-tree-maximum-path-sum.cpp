@@ -45,6 +45,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -58,8 +59,19 @@ struct TreeNode {
 
 class Solution {
 public:
+	static int maxPathSum(TreeNode* root, int &ret) {
+		if (!root) return 0;
+		int l=max(0, maxPathSum(root->left, ret));
+		int r=max(0, maxPathSum(root->right, ret));
+		ret = max(ret, l+r+root->val);
+		return max(l,r)+root->val;
+	}
     static int maxPathSum(TreeNode* root) {
-        
+		if (!root)
+			return 0;
+		int ret=INT_MIN;
+		maxPathSum(root, ret);
+		return ret;
     }
 };
 
@@ -76,4 +88,3 @@ int main()
 	return 0;
 }
 #endif
-

@@ -43,7 +43,7 @@ using namespace std;
 
 class Solution {
 public:
-    int findPeakElement(vector<int>& nums) {
+    static int findPeakElement(vector<int>& nums) {
         
     }
 };
@@ -51,6 +51,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums = {1, 2, 3, 1};
+	cout << Solution::findPeakElement(nums) << endl;
 	return 0;
 }
 #endif

@@ -38,7 +38,7 @@ using namespace std;
 
 class Solution {
 public:
-    string fractionToDecimal(int numerator, int denominator) {
+    static string fractionToDecimal(int numerator, int denominator) {
         
     }
 };
@@ -46,7 +46,10 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<pair<int,int>> arg{{1,2}, {2,1}, {2,3}};
+	for (auto a: arg) {
+		cout << Solution::fractionToDecimal(a.first, a.second) << endl;
+	}
 	return 0;
 }
 #endif
-

@@ -30,7 +30,7 @@ using namespace std;
 
 class Solution {
 public:
-    int majorityElement(vector<int>& nums) {
+    static int majorityElement(vector<int>& nums) {
         
     }
 };
@@ -38,7 +38,9 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums{1,1,2,2,2};
+	int ret = Solution::majorityElement(nums);
+	cout << ret << endl;
 	return 0;
 }
 #endif
-

@@ -60,7 +60,7 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    static ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         
     }
 };
@@ -68,6 +68,18 @@ public:
 #ifdef TEST
 int main()
 {
+    ListNode l1_3(4), l1_2=(2), l1_1=(1);
+    ListNode l2_3(4), l2_2=(3), l2_1=(1);
+	l1_2.next = &l1_3; l1_1.next = &l1_2;
+	l2_2.next = &l2_3; l2_1.next = &l2_2;
+	ListNode *ret = Solution::getIntersectionNode(&l1_1, &l2_1);
+	while (ret) {
+		cout << ret->val;
+		ret = ret->next;
+		if (ret)
+			cout << "->";
+	}
+	cout << endl;
 	return 0;
 }
 #endif

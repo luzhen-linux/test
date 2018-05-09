@@ -39,7 +39,8 @@ struct Point {
 
 class Solution {
 public:
-    int maxPoints(vector<Point>& points) {
+
+    static int maxPoints(vector<Point>& points) {
         
     }
 };
@@ -47,7 +48,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<Point> points{{1,1}, {2,2}, {3,3}, {2,4}};
+	cout << Solution::maxPoints(points) << endl;
 	return 0;
 }
 #endif
-
