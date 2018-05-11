@@ -31,7 +31,12 @@ using namespace std;
 class Solution {
 public:
     static int majorityElement(vector<int>& nums) {
-        
+		unordered_map<int, int> count;
+		int half = nums.size()/2;
+		for (auto i:nums) {
+			if (++count[i]>half)
+				return i;
+		}
     }
 };
 

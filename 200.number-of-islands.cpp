@@ -36,14 +36,15 @@ using namespace std;
 
 class Solution {
 public:
-    int numIslands(vector<vector<char>>& grid) {
-        
+    static int numIslands(vector<vector<char>>& grid) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<vector<char>> grid{{'1','1','1','1','0'},{'1','1','0','1','0'},{'1','1','0','0','0'},{'0','0','0','0','0'}};
+	cout << Solution::numIslands(grid) << endl;
 	return 0;
 }
 #endif

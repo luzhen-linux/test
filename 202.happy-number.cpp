@@ -41,14 +41,14 @@ using namespace std;
 
 class Solution {
 public:
-    bool isHappy(int n) {
-        
+    static bool isHappy(int n) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	cout << Solution::isHappy(19) << endl;
 	return 0;
 }
 #endif

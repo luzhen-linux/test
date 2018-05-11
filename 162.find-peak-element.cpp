@@ -36,6 +36,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -44,7 +45,13 @@ using namespace std;
 class Solution {
 public:
     static int findPeakElement(vector<int>& nums) {
-        
+		int i, prev=INT_MIN, sz_nums=nums.size();
+		for (i=0; i<sz_nums; i++) {
+			if (nums[i]<prev)
+				break;
+			prev = nums[i];
+		}
+		return i-1;
     }
 };
 

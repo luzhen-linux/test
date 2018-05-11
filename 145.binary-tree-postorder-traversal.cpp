@@ -41,6 +41,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <stack>
 #include <algorithm>
 #include <iostream>
 
@@ -57,7 +58,39 @@ struct TreeNode {
 class Solution {
 public:
     static vector<int> postorderTraversal(TreeNode* root) {
-        
+		vector<int> ret;
+		if (!root)
+			return ret;
+		TreeNode *cur=root;
+		stack<TreeNode*> res;
+		stack<TreeNode*> node;
+		int skip_right=0;
+		res.push(root);
+		while (1) {
+			//printf("cur=%d, %d\n", cur->val, skip_right);
+			if (!skip_right &&cur->right) {
+				res.push(cur->right);
+				node.push(cur);
+				cur = cur->right;
+				continue;
+			}
+			skip_right = 0;
+			if (cur->left) {
+				res.push(cur->left);
+				cur = cur->left;
+				continue;
+			}
+			if (node.empty())
+				break;
+			cur = node.top();
+			node.pop();
+			skip_right = 1;
+		}
+		while(!res.empty()) {
+			ret.push_back(res.top()->val);
+			res.pop();
+		}
+		return ret;
     }
 };
 
@@ -78,4 +111,3 @@ int main()
 	return 0;
 }
 #endif
-

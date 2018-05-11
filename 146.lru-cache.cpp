@@ -44,6 +44,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <deque>
 #include <algorithm>
 #include <iostream>
 
@@ -52,14 +53,39 @@ using namespace std;
 #endif
 
 class LRUCache {
+private:
+	unordered_map<int, int> map;
+	deque<int> access;
+	int max;
 public:
     LRUCache(int capacity) {
+		map.clear();
+		access.clear();
+		max = capacity;
     }
     
     int get(int key) {
+		if (map.find(key)==map.end())
+			return -1;
+		access.erase(find (access.begin(), access.end(), key));
+		access.push_front(key);
+		return map[key];
     }
     
     void put(int key, int value) {
+		if (map.find(key)!=map.end()) {
+			map[key] = value;
+			access.erase(find (access.begin(), access.end(), key));
+			access.push_front(key);
+			return;
+		}
+		if (map.size()==max) {
+			map.erase(access[max-1]);
+			access.pop_back();
+		}
+		map[key] = value;
+		access.push_front(key);
+		return;
     }
 };
 
@@ -77,13 +103,13 @@ int main()
 
 	cache.put(1, 1);
 	cache.put(2, 2);
-	cache.get(1);       // returns 1
+	cout << cache.get(1) << endl;       // returns 1
 	cache.put(3, 3);    // evicts key 2
-	cache.get(2);       // returns -1 (not found)
+	cout << cache.get(2) << endl;       // returns -1 (not found)
 	cache.put(4, 4);    // evicts key 1
-	cache.get(1);       // returns -1 (not found)
-	cache.get(3);       // returns 3
-	cache.get(4);       // returns 4
+	cout << cache.get(1) << endl;       // returns -1 (not found)
+	cout << cache.get(3) << endl;       // returns 3
+	cout << cache.get(4) << endl;       // returns 4
 	return 0;
 }
 #endif

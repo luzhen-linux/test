@@ -49,7 +49,7 @@ using namespace std;
 
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
+    static bool isPalindrome(ListNode* head) {
         
     }
 };
@@ -57,6 +57,11 @@ public:
 #ifdef TEST
 int main()
 {
+    ListNode l1_3(4), l1_2=(2), l1_1=(1);
+    ListNode l2_3(4), l2_2=(3), l2_1=(1);
+	l1_2.next = &l1_3; l1_1.next = &l1_2;
+	l2_2.next = &l2_3; l2_1.next = &l2_2;
+	cout << Solution::isPalindrome(&l1_1) << endl;
 	return 0;
 }
 #endif

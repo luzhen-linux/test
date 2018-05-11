@@ -37,7 +37,7 @@ using namespace std;
 
 class Solution {
 public:
-    bool containsDuplicate(vector<int>& nums) {
+    static bool containsDuplicate(vector<int>& nums) {
         
     }
 };
@@ -45,6 +45,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector <int> nums{1,2,3,4,5,6,2};
+	cout << Solution::containsDuplicate(nums) << endl;
 	return 0;
 }
 #endif

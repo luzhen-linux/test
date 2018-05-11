@@ -34,14 +34,15 @@ using namespace std;
 
 class Solution {
 public:
-    int rob(vector<int>& nums) {
-        
+    static int rob(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector <int> nums {1,2,3,4,5,6};
+	cout << Solution::rob(nums) << endl;
 	return 0;
 }
 #endif

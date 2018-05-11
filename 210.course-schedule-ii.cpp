@@ -83,14 +83,18 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
-        
+    static vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<pair<int,int>> prereq{{1,0},{2,0},{3,1},{3,2}};
+	vector<int> ret = Solution::findOrder(4, prereq);
+	for (auto i:ret)
+		cout << i << ", ";
+	cout << endl;
 	return 0;
 }
 #endif

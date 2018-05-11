@@ -50,14 +50,20 @@ struct TreeNode {
 
 class Solution {
 public:
-    int kthSmallest(TreeNode* root, int k) {
-        
+    static int kthSmallest(TreeNode* root, int k) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+    vector<TreeNode> node{1,2,3,4,5,6};
+	node[0].left = &node[1];
+	node[0].right = &node[4];
+	node[1].left = &node[2];
+	node[1].right = &node[3];
+	node[4].right = &node[5];
+	cout << Solution::kthSmallest (&node[0],2) << endl;
 	return 0;
 }
 #endif

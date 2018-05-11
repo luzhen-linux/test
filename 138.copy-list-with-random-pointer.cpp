@@ -44,7 +44,20 @@ struct RandomListNode {
 class Solution {
 public:
     static RandomListNode *copyRandomList(RandomListNode *head) {
-        
+		map<RandomListNode*, RandomListNode*> map;
+		RandomListNode *tmp;
+		for (RandomListNode *node=head; node; node=node->next) {
+			tmp = new RandomListNode(node->label);
+			if (!tmp)
+				return NULL;
+			map[node] = tmp;
+		}
+		for (RandomListNode *node=head; node; node=node->next) {
+			tmp = map[node];
+			tmp->next = map[node->next];
+			tmp->random = map[node->random];
+		}
+		return map[head];
     }
 };
 
@@ -52,7 +65,16 @@ public:
 int main()
 {
 	vector<RandomListNode> node{3,4,5};
+	node[0].next = &node[1];
+	node[0].random = &node[2];
+	node[1].next = &node[2];
+	node[1].random = &node[0];
+	node[2].random = &node[1];
 	RandomListNode *ret = Solution::copyRandomList(&node[0]);
+	while (ret) {
+		cout << ret->label << endl;
+		ret = ret->next;
+	}
 	return 0;
 }
 #endif

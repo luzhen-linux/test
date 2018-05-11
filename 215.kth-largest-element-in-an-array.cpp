@@ -34,7 +34,7 @@ using namespace std;
 
 class Solution {
 public:
-    int findKthLargest(vector<int>& nums, int k) {
+    static int findKthLargest(vector<int>& nums, int k) {
         
     }
 };
@@ -42,6 +42,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums{3,2,1,5,6,4};
+	cout << Solution::findKthLargest(nums, 2) << endl;
 	return 0;
 }
 #endif

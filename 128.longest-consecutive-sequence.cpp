@@ -36,16 +36,33 @@ using namespace std;
 class Solution {
 public:
     static int longestConsecutive(vector<int>& nums) {
-        
+		int sz_nums=nums.size(), maxcont=0;
+		unordered_map <int, int> map;
+		for (int i=0; i<sz_nums; i++) {
+			int num = nums[i], cont;
+			if (map[num])
+				continue;
+			cont = map[num] = map[num-1]+1;
+			//printf("map[%d]=%d\n", num, map[num]);
+			if (map[num+1]) {
+				while(map[++num]) {
+					cont++;
+				}
+				map[num-1] = cont;
+				//printf("map[%d]=%d, %d\n", num-1, map[num-1], cont);
+			}
+			maxcont = max(maxcont, cont);
+		}
+		return maxcont;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums = {100, 4, 200, 1, 3, 2};
+	//vector<int> nums = {100, 4, 200, 1, 3, 2};
+	vector<int> nums = {1,3,5,2,4};
 	cout << Solution::longestConsecutive(nums) << endl;
 	return 0;
 }
 #endif
-

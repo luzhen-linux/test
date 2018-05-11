@@ -40,7 +40,7 @@ using namespace std;
 
 class Solution {
 public:
-    int calculate(string s) {
+    static int calculate(string s) {
         
     }
 };
@@ -48,6 +48,8 @@ public:
 #ifdef TEST
 int main()
 {
+	string s("( 1+(4+5+2)-3 ) + ( 6+8 )");
+	cout << s << " = " << Solution::calculate(s) << endl;
 	return 0;
 }
 #endif

@@ -54,7 +54,7 @@ using namespace std;
 
 class Solution {
 public:
-    int calculate(string s) {
+    static int calculate(string s) {
         
     }
 };
@@ -62,6 +62,8 @@ public:
 #ifdef TEST
 int main()
 {
+	string s(" 3+5 / 2 ");
+	cout << s << " = " << Solution::calculate(s) << endl;
 	return 0;
 }
 #endif

@@ -81,12 +81,40 @@ struct UndirectedGraphNode {
 
 class Solution {
 public:
+    static UndirectedGraphNode *cloneGraph(UndirectedGraphNode *src,
+			map<UndirectedGraphNode*, UndirectedGraphNode*> &map) {
+		if (!src)
+			return NULL;
+		if (!(map.find(src)==map.end()))
+			return map[src];
+		UndirectedGraphNode* dest = new UndirectedGraphNode(src->label);
+		if (!dest)
+			return NULL;
+		map[src] = dest;
+		for (auto n: src->neighbors) {
+			UndirectedGraphNode* neighbor = cloneGraph(n, map);
+			if (neighbor)
+				dest->neighbors.push_back(neighbor);
+		}
+		return dest;
+	}
     static UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
-        
+		map<UndirectedGraphNode*, UndirectedGraphNode*> map;
+		return cloneGraph(node, map);
     }
 };
 
 #ifdef TEST
+void pr_node(UndirectedGraphNode *node)
+{
+	if (!node) return;
+	cout << node->label << endl;
+	for (auto n: node->neighbors) {
+		if (n!=node)
+			pr_node(n);
+	}
+}
+
 int main()
 {
 	vector<UndirectedGraphNode> node{0,1,2};
@@ -95,6 +123,7 @@ int main()
 	node[1].neighbors.push_back(&node[2]);
 	node[2].neighbors.push_back(&node[2]);
     UndirectedGraphNode *ret = Solution::cloneGraph(&node[0]);
+	pr_node(ret);
 	return 0;
 }
 #endif

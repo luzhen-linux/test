@@ -44,7 +44,19 @@ struct ListNode {
 class Solution {
 public:
     static bool hasCycle(ListNode *head) {
-        
+		if (!head)
+			return 0;
+		ListNode *next=head;
+		ListNode *nextnext=head->next;
+		while (next && nextnext) {
+			if (next==nextnext)
+				return 1;
+			if (!nextnext->next)
+				return 0;
+			next = next->next;
+			nextnext = nextnext->next->next;
+		}
+		return 0;
     }
 };
 

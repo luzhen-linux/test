@@ -37,14 +37,15 @@ using namespace std;
 
 class Solution {
 public:
-    int titleToNumber(string s) {
-        
+    static int titleToNumber(string s) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	string s("AAA");
+	cout << Solution::titleToNumber(s) << endl;
 	return 0;
 }
 #endif

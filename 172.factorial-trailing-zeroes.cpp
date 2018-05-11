@@ -28,7 +28,7 @@ using namespace std;
 
 class Solution {
 public:
-    int trailingZeroes(int n) {
+    static int trailingZeroes(int n) {
         
     }
 };
@@ -36,6 +36,8 @@ public:
 #ifdef TEST
 int main()
 {
+	int n=123120000;
+	cout << Solution::trailingZeroes(n) << endl;
 	return 0;
 }
 #endif

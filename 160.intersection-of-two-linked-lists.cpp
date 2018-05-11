@@ -61,7 +61,30 @@ struct ListNode {
 class Solution {
 public:
     static ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        
+		int sz_A=0, sz_B=0, steps;
+		ListNode *p=headA, *q=headB;
+		while (p)
+			sz_A++, p=p->next;
+		while (q)
+			sz_B++, q=q->next;
+		p=headA, q=headB;
+		if (sz_A>sz_B) {
+			steps = sz_A-sz_B;
+			while (steps--)
+				p=p->next;
+		}
+		else if (sz_A<sz_B) {
+			steps = sz_B-sz_A;
+			while (steps--)
+				q=q->next;
+		}
+		while (p&&q) {
+			if (p==q)
+				return p;
+			p=p->next;
+			q=q->next;
+		}
+		return NULL;
     }
 };
 
@@ -71,7 +94,7 @@ int main()
     ListNode l1_3(4), l1_2=(2), l1_1=(1);
     ListNode l2_3(4), l2_2=(3), l2_1=(1);
 	l1_2.next = &l1_3; l1_1.next = &l1_2;
-	l2_2.next = &l2_3; l2_1.next = &l2_2;
+	l2_2.next = &l2_3; l2_1.next = &l1_2;
 	ListNode *ret = Solution::getIntersectionNode(&l1_1, &l2_1);
 	while (ret) {
 		cout << ret->val;

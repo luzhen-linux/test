@@ -64,7 +64,7 @@ using namespace std;
 
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+    static bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
         
     }
 };
@@ -72,6 +72,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<pair<int,int>> prereq{{1,0},{0,1}};
+	cout << Solution::canFinish(2, prereq) << endl;
 	return 0;
 }
 #endif

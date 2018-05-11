@@ -32,14 +32,15 @@ using namespace std;
 
 class Solution {
 public:
-    string largestNumber(vector<int>& nums) {
-        
+    static string largestNumber(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums {3, 30, 34, 5, 9};
+	cout << Solution::largestNumber(nums) << endl;
 	return 0;
 }
 #endif

@@ -27,14 +27,14 @@ using namespace std;
 
 class Solution {
 public:
-    int countPrimes(int n) {
-        
+    static int countPrimes(int n) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	cout << Solution::countPrimes(100) << endl;
 	return 0;
 }
 #endif

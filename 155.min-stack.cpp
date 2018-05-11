@@ -44,34 +44,46 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <stack>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
 #endif
 
 class MinStack {
+private:
+	stack<int> value;
+	stack<int> minval;
+	int cur_min;
 public:
     /** initialize your data structure here. */
     MinStack() {
-        
+		cur_min = INT_MAX;
     }
     
     void push(int x) {
-        
+		value.push(x);
+		cur_min = min(cur_min, x);
+		minval.push(cur_min);
     }
     
     void pop() {
-        
+		if (!value.empty()) {
+			value.pop();
+			minval.pop();
+			cur_min = minval.empty()?INT_MAX:minval.top();
+		}
     }
     
     int top() {
-        
+		return value.top();
     }
     
     int getMin() {
-        
+		return minval.top();
     }
 };
 

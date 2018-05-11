@@ -35,6 +35,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -43,15 +44,28 @@ using namespace std;
 class Solution {
 public:
     static int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        
+		int sz_gas = gas.size();
+		if (sz_gas==0)
+			return -1;
+		int start=-1, total_diff=0, min=INT_MAX;
+		for (int i=0; i<sz_gas; i++) {
+			total_diff += gas[i] - cost[i];
+			if (min>=total_diff) {
+				start = (i+1)%sz_gas;
+				min = total_diff;
+			}
+		}
+		if (total_diff<0)
+			return -1;
+		return start;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> gas{4};
-	vector<int> cost{5};
+	vector<int> gas{1,2,3,4,5};
+	vector<int> cost{3,4,5,1,2};
 	cout << Solution::canCompleteCircuit(gas, cost) << endl;
 	return 0;
 }

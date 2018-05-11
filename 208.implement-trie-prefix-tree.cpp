@@ -72,6 +72,12 @@ public:
 #ifdef TEST
 int main()
 {
+	string word("hello");
+	string prefix("he");
+	Trie obj;
+	obj.insert(word);
+	bool param_2 = obj.search(word);
+	bool param_3 = obj.startsWith(prefix);
 	return 0;
 }
 #endif
