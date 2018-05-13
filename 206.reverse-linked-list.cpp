@@ -29,6 +29,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <stack>
 #include <algorithm>
 #include <iostream>
 
@@ -44,7 +45,24 @@ struct ListNode {
 class Solution {
 public:
     static ListNode* reverseList(ListNode* head) {
-        
+		if (!head)
+			return NULL;
+		stack<ListNode *> stack;
+		while (head) {
+			stack.push(head);
+			head = head->next;
+		}
+		ListNode *tmp=stack.top();
+		head = stack.top();
+		tmp->next = NULL;
+		stack.pop();
+		while (!stack.empty()) {
+			tmp->next = stack.top();
+			tmp = tmp->next;
+			tmp->next = NULL;
+			stack.pop();
+		}
+		return head;
     }
 };
 

@@ -74,6 +74,7 @@ using namespace std;
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <set>
 #include <algorithm>
 #include <iostream>
 
@@ -83,7 +84,46 @@ using namespace std;
 
 class Solution {
 public:
+	static int dfs (int course, map<int, set<int>> &req, vector<int> &visited, vector<int> &out) {
+		if (visited[course]==1)
+			return -1;
+		if (visited[course]==-1)
+			return 0;
+		visited[course]=1;
+		if (req.find(course)==req.end()) {
+			out.push_back(course);
+			visited[course]=-1;
+			return 0;
+		}
+		set<int> set=req[course];
+		for (auto one: set) {
+			if (dfs(one, req, visited, out)<0)
+				return -1;
+		}
+		visited[course]=-1;
+		out.push_back(course);
+		return 0;
+	}
     static vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
+		map<int, set<int>> req;
+		for (auto one:prerequisites) {
+			set<int> set;
+			if (req.find(one.first)!=req.end())
+				set = req[one.first];
+			set.insert(one.second);
+			req[one.first] = set;
+		}
+		vector<int> visited(numCourses);
+		vector<int> out;
+		for (auto course: req) {
+			if (dfs(course.first, req, visited, out)<0)
+				return {};
+		}
+		for (int i=0; i<numCourses; i++) {
+			if (find(out.begin(), out.end(), i)==out.end())
+				out.push_back(i);
+		}
+		return out;
     }
 };
 

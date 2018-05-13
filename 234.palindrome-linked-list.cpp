@@ -50,14 +50,29 @@ using namespace std;
 class Solution {
 public:
     static bool isPalindrome(ListNode* head) {
-        
+		string forward;
+		string backward;
+		ListNode *node=head, *prev=NULL;
+		while (node) {
+			ListNode *tmp=node->next;
+			forward += to_string(node->val);
+			node->next = prev;
+			prev = node;
+			node = tmp;
+		}
+		node = prev;
+		while (node) {
+			backward += to_string(node->val);
+			node = node->next;
+		}
+		return (forward==backward);
     }
 };
 
 #ifdef TEST
 int main()
 {
-    ListNode l1_3(4), l1_2=(2), l1_1=(1);
+    ListNode l1_3(1), l1_2=(2), l1_1=(1);
     ListNode l2_3(4), l2_2=(3), l2_1=(1);
 	l1_2.next = &l1_3; l1_1.next = &l1_2;
 	l2_2.next = &l2_3; l2_1.next = &l2_2;

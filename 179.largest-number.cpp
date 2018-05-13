@@ -33,6 +33,19 @@ using namespace std;
 class Solution {
 public:
     static string largestNumber(vector<int>& nums) {
+		string ret;
+		vector<string> tmp;
+		int all_zero = 1;
+		for (auto i:nums) {
+			tmp.push_back(to_string(i));
+			if (i>0) all_zero = 0;
+		}
+		if (all_zero)
+			return "0";
+		sort (tmp.begin(), tmp.end(), [](string a, string b){return a+b>b+a;});
+		for (auto s: tmp)
+			ret += s;
+		return ret;
     }
 };
 

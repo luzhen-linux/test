@@ -29,16 +29,21 @@ using namespace std;
 class Solution {
 public:
     static int trailingZeroes(int n) {
-        
+		int val=n;
+		int number=0;
+		while (val) {
+			val = val/5;
+			number += val;
+		}
+		return number;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	int n=123120000;
+	int n=30;
 	cout << Solution::trailingZeroes(n) << endl;
 	return 0;
 }
 #endif
-

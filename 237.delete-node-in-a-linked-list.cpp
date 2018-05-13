@@ -45,14 +45,37 @@ struct ListNode {
 
 class Solution {
 public:
-    void deleteNode(ListNode* node) {
-        
+    static void deleteNode(ListNode* node) {
+		ListNode *prev=NULL;
+		while (node) {
+			ListNode *next=node->next;
+			if (next)
+				node->val = next->val;
+			else if (prev)
+				prev->next =NULL;
+			prev = node;
+			node = next;
+		}
+		return;
     }
 };
 
 #ifdef TEST
 int main()
 {
+    ListNode l1_3(4), l1_2=(2), l1_1=(1);
+    ListNode l2_3(4), l2_2=(3), l2_1=(1);
+	l1_2.next = &l1_3; l1_1.next = &l1_2; l1_3.next = &l2_1;
+	l2_2.next = &l2_3; l2_1.next = &l2_2;
+	Solution::deleteNode(&l2_1);
+	ListNode *ret = &l1_1;
+	while (ret) {
+		cout << ret->val;
+		ret = ret->next;
+		if (ret)
+			cout << "->";
+	}
+	cout << endl;
 	return 0;
 }
 #endif

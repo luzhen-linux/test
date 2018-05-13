@@ -52,6 +52,7 @@ using namespace std;
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -59,14 +60,36 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        
+    static vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+		vector<int> ret;
+		int sz_nums=nums.size();
+		if (!sz_nums)
+			return ret;
+		int maxv=INT_MIN;
+		for (int i=0; i<k; i++)
+			maxv = max(maxv,nums[i]);
+		ret.push_back(maxv);
+		for (int i=k; i<sz_nums; i++) {
+			if (maxv==nums[i-k]) {
+				maxv = INT_MIN;
+				for (int j=i-k+1; j<i; j++)
+					maxv = max(maxv,nums[j]);
+			}
+			maxv = max(maxv,nums[i]);
+			ret.push_back(maxv);
+		}
+		return ret;
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={1,3,-1,-3,5,3,6,7};
+	vector<int> ret = Solution::maxSlidingWindow(nums,3);
+	for (auto s:ret)
+		cout << s << ", ";
+	cout << endl;
 	return 0;
 }
 #endif

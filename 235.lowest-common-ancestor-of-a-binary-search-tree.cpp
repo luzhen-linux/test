@@ -63,14 +63,40 @@ struct TreeNode {
 
 class Solution {
 public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        
+    static TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+		if (!root || !p || !q)
+			return NULL;
+		if (root==p || root==q)
+			return root;
+		TreeNode *left = lowestCommonAncestor(root->left, p, q);
+		TreeNode *right = lowestCommonAncestor(root->right, p, q);
+		if (left&&right)
+			return root;
+		if (left)
+			return left;
+		return right;
     }
 };
 
 #ifdef TEST
+void pr_node(TreeNode *node)
+{
+	if (!node) return;
+	pr_node(node->left);
+	cout << node->val << endl;
+	pr_node(node->right);
+}
+
 int main()
 {
+    vector<TreeNode> node{1,2,3,4,5,6};
+	node[0].left = &node[1];
+	node[0].right = &node[4];
+	node[1].left = &node[2];
+	node[1].right = &node[3];
+	node[4].right = &node[5];
+	TreeNode *ret = Solution::lowestCommonAncestor (&node[0], &node[3], &node[2]);
+	pr_node(ret);
 	return 0;
 }
 #endif

@@ -43,6 +43,8 @@ public:
 			}
 			//cout << "nums[" << i << "]:" << nums[i] << "  "; for (auto i:nums) cout << i << ", "; cout << endl;
 			//printf("[%d] %d <==> [%d] %d\n", i, nums[i], nums[i]-1, nums[nums[i]-1]);
+			if (nums[i]-1==i)
+				continue;
 			swap(nums[i], nums[nums[i]-1]);
 			while (nums[i]>0&&nums[i]<=i) {
 				if (nums[i]==nums[nums[i]-1])

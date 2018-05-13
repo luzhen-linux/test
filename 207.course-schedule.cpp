@@ -55,6 +55,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <set>
 #include <algorithm>
 #include <iostream>
 
@@ -64,15 +65,55 @@ using namespace std;
 
 class Solution {
 public:
+	static int visit(int course, map<int, set<int>> &req, vector<int> &visited) {
+		if (visited[course]==1)
+			return -1;
+		if (visited[course]==-1)
+			return 0;
+		visited[course] = 1;
+		if (req.find(course)==req.end()) {
+			visited[course] = -1;
+			return 0;
+		}
+		set<int> set = req[course];
+		for (auto one: set) {
+			if (visit(one, req, visited)<0)
+				return -1;
+		}
+		visited[course] = -1;
+		return 0;
+	}
     static bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        
+		map<int, set<int>> req;
+		for (auto each: prerequisites) {
+			set<int> set;
+			if (req.find(each.first)!=req.end())
+				set = req[each.first];
+			set.insert(each.second);
+			req[each.first] = set;
+		}
+		/*
+		for (auto each: req) {
+			cout << each.first << "->" ;
+			set<int> set = each.second;
+			for (auto one:set)
+				cout << one << ",";
+			cout << endl;
+		}
+		*/
+		vector<int> visited(numCourses);
+		for (auto each: req) {
+			if (visit(each.first, req, visited)<0)
+				return false;
+		}
+		return true;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<pair<int,int>> prereq{{1,0},{0,1}};
+	vector<pair<int,int>> prereq{{1,0},{2,0}};
 	cout << Solution::canFinish(2, prereq) << endl;
 	return 0;
 }

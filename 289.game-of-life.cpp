@@ -55,6 +55,7 @@
  * creating all test cases.
  */
 #ifdef TEST
+#include <unistd.h>
 #include <unordered_map>
 #include <map>
 #include <algorithm>
@@ -66,14 +67,54 @@ using namespace std;
 
 class Solution {
 public:
-    void gameOfLife(vector<vector<int>>& board) {
-        
+	static int liveNeighbors(vector<vector<int>> &board, int x,
+			int y, int row, int col) {
+		int lives=-board[x][y];
+		for (int i=x-1; i<=x+1; i++)
+			for (int j=y-1; j<=y+1; j++) {
+				if (i>=0&&i<row&&j>=0&&j<col)
+					lives += board[i][j];
+			}
+		return lives;
+	}
+    static void gameOfLife(vector<vector<int>>& board) {
+		int row=board.size();
+		if (row==0)
+			return;
+		int col=board[0].size();
+		vector<vector<int>> b{board};
+		for (int i=0; i<row; i++) {
+			for (int j=0; j<col; j++) {
+				int lives = liveNeighbors(b, i, j, row, col);
+				if (b[i][j]) {
+					if (lives<2 || lives>3)
+						board[i][j] = 0;
+					else
+						board[i][j] = 1;
+				}
+				else if (lives==3)
+						board[i][j] = 1;
+			}
+		}
+		return;
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<vector<int>> board{{1,1,0,0,0,0}, {1,0,0,0,0,0},
+		{0,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}};
+	for (;;) {
+		Solution::gameOfLife(board);
+		for (auto row:board) {
+			for (auto col: row)
+				cout << col << " ";
+			cout << endl;
+		}
+		cout << endl;
+		sleep(1);
+	}
 	return 0;
 }
 #endif

@@ -42,6 +42,21 @@ using namespace std;
 class Solution {
 public:
     static bool isHappy(int n) {
+		int num = n;
+		unordered_map<int,int> map;
+		map[num] = 1;
+		while (num!=1) {
+			int tmp=num;
+			num=0;
+			while (tmp) {
+				num += (tmp%10)*(tmp%10);
+				tmp /= 10;
+			}
+			if (map[num])
+				return false;
+			map[num] = 1;
+		}
+		return true;
     }
 };
 

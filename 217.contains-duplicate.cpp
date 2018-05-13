@@ -38,14 +38,20 @@ using namespace std;
 class Solution {
 public:
     static bool containsDuplicate(vector<int>& nums) {
-        
+		unordered_map<int, int> map;
+		for (auto i:nums) {
+			if (map.count(i))
+				return true;
+			map[i]=1;
+		}
+		return false;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector <int> nums{1,2,3,4,5,6,2};
+	vector <int> nums{1,2,3,4,1};
 	cout << Solution::containsDuplicate(nums) << endl;
 	return 0;
 }

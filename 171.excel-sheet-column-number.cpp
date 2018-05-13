@@ -38,13 +38,23 @@ using namespace std;
 class Solution {
 public:
     static int titleToNumber(string s) {
+#define NUM_CHARSET 26
+		int sz_str = s.size();
+		long number = 0;
+		long power=1;
+		for (int i=sz_str-1; i>=0; i--) {
+			int diff = s[i] - 'A' + 1;
+			number += diff*power;
+			power *= NUM_CHARSET;
+		}
+		return number;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	string s("AAA");
+	string s("AAC");
 	cout << Solution::titleToNumber(s) << endl;
 	return 0;
 }

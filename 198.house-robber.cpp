@@ -35,13 +35,29 @@ using namespace std;
 class Solution {
 public:
     static int rob(vector<int>& nums) {
+		int sz_nums=nums.size();
+		if (sz_nums<=0)
+			return 0;
+		if (sz_nums<=1)
+			return nums[0];
+		if (sz_nums<=2)
+			return max(nums[0], nums[1]);
+		int prev=nums[0], maxrob=max(nums[0],nums[1]);
+		//for (auto i:nums) cout << i << " "; cout << endl;
+		for (int i=2; i<sz_nums; i++) {
+			//printf("%d: %d, %d, %d\n", i, prev, maxrob, nums[i]);
+			int tmp=maxrob;
+			maxrob = max(prev+nums[i], maxrob);
+			prev = tmp;
+		}
+		return maxrob;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector <int> nums {1,2,3,4,5,6};
+	vector <int> nums {12,11,0,4,6,3};
 	cout << Solution::rob(nums) << endl;
 	return 0;
 }

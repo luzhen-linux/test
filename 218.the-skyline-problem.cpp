@@ -69,16 +69,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
-#include <algorithm>
-#include <iostream>
-
-using namespace std;
-
-#endif
-
-#ifdef TEST
-#include <unordered_map>
-#include <map>
+#include <set>
 #include <algorithm>
 #include <iostream>
 
@@ -88,8 +79,23 @@ using namespace std;
 
 class Solution {
 public:
-    vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
-        
+    static vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
+		vector<pair<int,int>> ret;
+		vector<vector<int>> &b=buildings;
+		struct line {
+			int max;
+			set<int> val;
+		};
+		set<int> cur;
+		vector<int> pos;
+		int curx=-1, sz_build=b.size();
+		for (int i=0; i<sz_build; i++) {
+			vector<int> dim = b[i];
+			line lines;
+			//if (curx<dim[0])
+			//for (auto one: cur)
+		}
+		return ret;
     }
 };
 

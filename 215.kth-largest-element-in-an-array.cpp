@@ -25,8 +25,10 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <list>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -35,7 +37,33 @@ using namespace std;
 class Solution {
 public:
     static int findKthLargest(vector<int>& nums, int k) {
-        
+		if (nums.empty())
+			return 0;
+		int sz_nums=nums.size();
+		if (k<=0 || k>sz_nums)
+			return 0;
+		if (k>sz_nums/3) {
+			sort(nums.begin(), nums.end());
+			return nums[sz_nums-k];
+		}
+		list<int> largest;
+		list<int>::iterator it;
+		for (int i=0; i<k; ++i) {
+			for (it=largest.begin(); it!=largest.end(); ++it)
+				if (*it>nums[i])
+					break;
+			largest.insert(it, nums[i]);
+		}
+		for (int i=k; i<sz_nums; ++i) {
+			if (nums[i] < largest.front())
+				continue;
+			largest.pop_front();
+			for (it=largest.begin(); it!=largest.end(); ++it)
+				if (*it>nums[i])
+					break;
+			largest.insert(it, nums[i]);
+		}
+		return largest.front();
     }
 };
 

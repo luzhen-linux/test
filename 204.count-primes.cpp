@@ -28,6 +28,18 @@ using namespace std;
 class Solution {
 public:
     static int countPrimes(int n) {
+		if (n<=0)
+			return 0;
+		int flaged[n]={};
+		int num=0;
+		for (int i=2; i<n; i++) {
+			if (flaged[i])
+				continue;
+			num++;
+			for (int j=2; j*i<n; j++)
+				flaged[j*i] = 1;
+		}
+		return num;
     }
 };
 

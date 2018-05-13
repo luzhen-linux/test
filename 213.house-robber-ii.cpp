@@ -37,13 +37,31 @@ using namespace std;
 class Solution {
 public:
     static int rob(vector<int>& nums) {
+		if (nums.empty())
+			return 0;
+		if (nums.size()==1)
+			return nums[0];
+		int prev, rob1, rob2;
+		prev = rob1 = nums[0];
+		for (int i=2; i<nums.size()-1; i++) {
+			int tmp = rob1;
+			rob1 = max(prev+nums[i], rob1);
+			prev = tmp;
+		}
+		prev = rob2 = 0;
+		for (int i=1; i<nums.size(); i++) {
+			int tmp = rob2;
+			rob2 = max(prev+nums[i], rob2);
+			prev = tmp;
+		}
+		return max(rob1, rob2);
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums{1,2,3,4,5,6};
+	vector<int> nums{1,2,1,1};
 	cout << Solution::rob(nums) << endl;
 	return 0;
 }

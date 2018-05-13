@@ -35,6 +35,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <stack>
 #include <algorithm>
 #include <iostream>
 
@@ -51,19 +52,37 @@ struct TreeNode {
 class Solution {
 public:
     static int kthSmallest(TreeNode* root, int k) {
+		stack<TreeNode*> stack;
+		TreeNode *cur = root;
+		while (1) {
+			if (cur) {
+				stack.push(cur);
+				cur = cur->left;
+			}
+			else if (!stack.empty()) {
+				cur = stack.top();
+				stack.pop();
+				if (--k==0)
+					return cur->val;
+				cur = cur->right;
+			}
+			else
+				break;
+		}
+		return 0;
     }
 };
 
 #ifdef TEST
 int main()
 {
-    vector<TreeNode> node{1,2,3,4,5,6};
+    vector<TreeNode> node{1,3,2,4,5,6};
 	node[0].left = &node[1];
 	node[0].right = &node[4];
 	node[1].left = &node[2];
 	node[1].right = &node[3];
 	node[4].right = &node[5];
-	cout << Solution::kthSmallest (&node[0],2) << endl;
+	cout << Solution::kthSmallest (&node[0],3) << endl;
 	return 0;
 }
 #endif
