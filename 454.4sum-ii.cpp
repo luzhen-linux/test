@@ -46,7 +46,7 @@ using namespace std;
 
 class Solution {
 public:
-    int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {
+    static int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {
         
     }
 };
@@ -54,7 +54,11 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> A = { 1, 2};
+	vector<int> B = {-2,-1};
+	vector<int> C = {-1, 2};
+	vector<int> D = { 0, 2};
+	cout << Solution::fourSumCount(A,B,C,D) << endl;
 	return 0;
 }
 #endif
-

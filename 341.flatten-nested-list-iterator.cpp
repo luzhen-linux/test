@@ -56,17 +56,25 @@
 using namespace std;
 
 class NestedInteger {
-  public:
-    // Return true if this NestedInteger holds a single integer, rather than a nested list.
-    bool isInteger() const;
+	private:
+		vector<int> list;
+	public:
+		NestedInteger(int nlist) {
+			list.push_back(nlist);
+		}
+		NestedInteger(vector<int> nlist) {
+			list = nlist;
+		}
+		// Return true if this NestedInteger holds a single integer, rather than a nested list.
+		bool isInteger() const;
 
-    // Return the single integer that this NestedInteger holds, if it holds a single integer
-    // The result is undefined if this NestedInteger holds a nested list
-    int getInteger() const;
+		// Return the single integer that this NestedInteger holds, if it holds a single integer
+		// The result is undefined if this NestedInteger holds a nested list
+		int getInteger() const;
 
-    // Return the nested list that this NestedInteger holds, if it holds a nested list
-    // The result is undefined if this NestedInteger holds a single integer
-    const vector<NestedInteger> &getList() const;
+		// Return the nested list that this NestedInteger holds, if it holds a nested list
+		// The result is undefined if this NestedInteger holds a single integer
+		const vector<NestedInteger> &getList() const;
 };
 #endif
 
@@ -94,7 +102,9 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<NestedInteger> nestedList; //={{1,1}, 2, {1,1}};
+	NestedIterator i(nestedList);
+	while (i.hasNext()) cout << i.next();
 	return 0;
 }
 #endif
-

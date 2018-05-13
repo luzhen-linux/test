@@ -41,14 +41,15 @@ using namespace std;
 
 class Solution {
 public:
-    int lengthOfLIS(vector<int>& nums) {
-        
+    static int lengthOfLIS(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={10, 9, 2, 5, 3, 7, 101, 18};
+	cout << Solution::lengthOfLIS(nums) << endl;
 	return 0;
 }
 #endif

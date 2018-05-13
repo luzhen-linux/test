@@ -64,7 +64,7 @@ using namespace std;
 
 class Solution {
 public:
-    int longestIncreasingPath(vector<vector<int>>& matrix) {
+    static int longestIncreasingPath(vector<vector<int>>& matrix) {
         
     }
 };
@@ -72,7 +72,8 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<vector<int>> matrix={{9,9,4}, {6,6,8}, {2,1,1}};
+	cout << Solution::longestIncreasingPath(matrix) << endl;
 	return 0;
 }
 #endif
-

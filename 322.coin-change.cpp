@@ -48,15 +48,16 @@ using namespace std;
 
 class Solution {
 public:
-    int coinChange(vector<int>& coins, int amount) {
-        
+    static int coinChange(vector<int>& coins, int amount) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> coins = {1, 2, 5};
+	int amount = 11;
+    cout << Solution::coinChange(coins, amount) << endl;
 	return 0;
 }
 #endif
-

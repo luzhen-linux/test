@@ -35,7 +35,7 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> topKFrequent(vector<int>& nums, int k) {
+    static vector<int> topKFrequent(vector<int>& nums, int k) {
         
     }
 };
@@ -43,7 +43,12 @@ public:
 #ifdef TEST
 int main()
 {
+	vector<int> nums={1,1,1,2,2,3};
+	int k = 2;
+	vector<int> ret = Solution::topKFrequent(nums, k);
+	for (auto i:ret)
+		cout << i << ", ";
+	cout << endl;
 	return 0;
 }
 #endif
-

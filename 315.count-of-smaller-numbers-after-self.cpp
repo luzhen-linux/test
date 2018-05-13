@@ -43,14 +43,18 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> countSmaller(vector<int>& nums) {
-        
+    static vector<int> countSmaller(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={5, 2, 6, 1};
+	vector<int> ret = Solution::countSmaller(nums);
+	for (auto i:ret)
+		cout << i << ", ";
+	cout << endl;
 	return 0;
 }
 #endif

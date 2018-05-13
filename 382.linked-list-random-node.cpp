@@ -77,6 +77,13 @@ public:
 #ifdef TEST
 int main()
 {
+	ListNode *head = new ListNode(1);
+	head->next = new ListNode(2);
+	head->next->next = new ListNode(3);
+	Solution solution(head);
+
+	// getRandom() should return either 1, 2, or 3 randomly. Each element should have equal probability of returning.
+	cout << solution.getRandom() << endl;
 	return 0;
 }
 #endif

@@ -45,15 +45,15 @@ using namespace std;
 
 class Solution {
 public:
-    int triangleNumber(vector<int>& nums) {
-        
+    static int triangleNumber(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={2,2,3,4};
+	cout << Solution::triangleNumber(nums) << endl;
 	return 0;
 }
 #endif
-

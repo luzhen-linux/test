@@ -74,6 +74,9 @@ public:
 #ifdef TEST
 int main()
 {
+	MedianFinder obj{};
+	obj.addNum(2);
+	double param_2 = obj.findMedian();
 	return 0;
 }
 #endif

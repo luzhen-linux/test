@@ -47,15 +47,18 @@ using namespace std;
 
 class Solution {
 public:
-    void wiggleSort(vector<int>& nums) {
-        
+    static void wiggleSort(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={1, 5, 1, 1, 6, 4};
+	Solution::wiggleSort(nums);
+	for (auto n:nums)
+		cout << n << ", ";
+	cout << endl;
 	return 0;
 }
 #endif
-

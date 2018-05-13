@@ -39,14 +39,15 @@ using namespace std;
 
 class Solution {
 public:
-    int firstUniqChar(string s) {
-        
+    static int firstUniqChar(string s) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	string s = "loveleetcode";
+	cout << Solution::firstUniqChar(s) << endl;
 	return 0;
 }
 #endif

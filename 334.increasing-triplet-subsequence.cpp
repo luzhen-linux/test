@@ -47,26 +47,18 @@ using namespace std;
 
 #endif
 
-#ifdef TEST
-#include <unordered_map>
-#include <map>
-#include <algorithm>
-#include <iostream>
-
-using namespace std;
-
-#endif
-
 class Solution {
 public:
-    bool increasingTriplet(vector<int>& nums) {
-        
+    static bool increasingTriplet(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={1, 2, 3, 4, 5};
+	//vector<int> nums={5, 4, 3, 2, 1};
+	cout << Solution::increasingTriplet(nums) << endl;
 	return 0;
 }
 #endif

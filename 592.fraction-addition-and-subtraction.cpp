@@ -71,15 +71,15 @@ using namespace std;
 
 class Solution {
 public:
-    string fractionAddition(string expression) {
-        
+    static string fractionAddition(string expression) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	string s="-1/2+1/2+1/3";
+	cout << Solution::fractionAddition(s) << endl;
 	return 0;
 }
 #endif
-

@@ -72,6 +72,7 @@
 #include <set>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -82,18 +83,34 @@ public:
     static vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
 		vector<pair<int,int>> ret;
 		vector<vector<int>> &b=buildings;
-		struct line {
-			int max;
-			set<int> val;
-		};
-		set<int> cur;
-		vector<int> pos;
-		int curx=-1, sz_build=b.size();
-		for (int i=0; i<sz_build; i++) {
-			vector<int> dim = b[i];
-			line lines;
-			//if (curx<dim[0])
-			//for (auto one: cur)
+		if (b.empty())
+			return ret;
+		int maxnum=0;
+		for (auto one:b)
+			maxnum = max(maxnum, one[1]);
+		set<int> pos;
+		map<int, int> height;
+		map<int, int>::iterator it;
+		for (auto dim:b) {
+			pos.insert(dim[0]);
+			pos.insert(dim[1]);
+			it = height.upper_bound(dim[0]);
+			if (it==height.end()) {
+				height[dim[0]] = dim[2];
+				height[dim[1]] = 0;
+			}
+			else {
+				--it;
+				if (it->second<dim[2]) {
+					height[dim[0]] = dim[2];
+				}
+			}
+		}
+		int prev=0;
+		for (auto one: pos) {
+			if (height[one]!=prev)
+				ret.push_back({one, height[one]});
+			prev = height[one];
 		}
 		return ret;
     }

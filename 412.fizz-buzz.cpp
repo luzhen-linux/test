@@ -53,14 +53,16 @@ using namespace std;
 
 class Solution {
 public:
-    vector<string> fizzBuzz(int n) {
-        
+    static vector<string> fizzBuzz(int n) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<string> ret = Solution::fizzBuzz(15);
+	for (auto s:ret)
+		cout << s << endl;
 	return 0;
 }
 #endif

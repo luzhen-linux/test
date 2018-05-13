@@ -29,7 +29,7 @@ using namespace std;
 
 class Solution {
 public:
-    string reverseString(string s) {
+    static string reverseString(string s) {
         
     }
 };
@@ -37,6 +37,8 @@ public:
 #ifdef TEST
 int main()
 {
+	string s="hello";
+	cout << Solution::reverseString(s) << endl;
 	return 0;
 }
 #endif

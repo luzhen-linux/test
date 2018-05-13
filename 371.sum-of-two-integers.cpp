@@ -31,15 +31,14 @@ using namespace std;
 
 class Solution {
 public:
-    int getSum(int a, int b) {
-        
+    static int getSum(int a, int b) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	cout << Solution::getSum(1,2) << endl;
 	return 0;
 }
 #endif
-

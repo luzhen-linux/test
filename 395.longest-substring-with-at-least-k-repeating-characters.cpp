@@ -50,26 +50,18 @@ using namespace std;
 
 #endif
 
-#ifdef TEST
-#include <unordered_map>
-#include <map>
-#include <algorithm>
-#include <iostream>
-
-using namespace std;
-
-#endif
-
 class Solution {
 public:
-    int longestSubstring(string s, int k) {
-        
+    static int longestSubstring(string s, int k) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	string s = "ababbc";
+	int k = 2;
+	cout << Solution::longestSubstring(s, k);
 	return 0;
 }
 #endif

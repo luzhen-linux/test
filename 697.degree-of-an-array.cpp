@@ -52,14 +52,16 @@ using namespace std;
 
 class Solution {
 public:
-    int findShortestSubArray(vector<int>& nums) {
-        
+    static int findShortestSubArray(vector<int>& nums) {
     }
 };
 
 #ifdef TEST
 int main()
 {
+	vector<int> nums={1, 2, 2, 3, 1};
+	//vector<int> nums={1,2,2,3,1,4,2};
+	cout << Solution::findShortestSubArray(nums) << endl;
 	return 0;
 }
 #endif
