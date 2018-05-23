@@ -46,6 +46,31 @@ using namespace std;
 class Solution {
 public:
     static int kthSmallest(vector<vector<int>>& matrix, int k) {
+		/*
+		int row=martrix.size();
+		if (!row)
+			return 0;
+		if col=matrix[0].size();
+		int curidx=0, count=1;
+		vector<int> next(row);
+		row[0] = 1;
+		for (int i=0; i<row; i++) {
+			if (curidx
+		}
+		*/
+		int n = matrix.size(), left=matrix[0][0], right=matrix[n-1][n-1];  
+		while(left < right)  
+		{  
+			long mid = (left+right)/2, num = 0;  
+			for(int i = 0; i < n; i++)  
+			{  
+				auto it = upper_bound(matrix[i].begin(), matrix[i].end(), mid);  
+				num += it - matrix[i].begin();  
+			}  
+			if(num < k) left = mid+1;  
+			else right = mid;  
+		}  
+		return left;  
     }
 };
 

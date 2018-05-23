@@ -34,23 +34,49 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
 #endif
+#define SOLUTION2 1
 
 class Solution {
 public:
     static int lengthOfLIS(vector<int>& nums) {
+		if (nums.empty())
+			return 0;
+		int sz_nums=nums.size();
+#if SOLUTION1 
+		vector<int> len(sz_nums,1);
+		for (int i=0; i<sz_nums; i++)
+			for (int j=0; j<i; j++)
+				if (nums[i]>nums[j]) {
+					len[i] = max(len[i], len[j]+1);
+				}
+		//for (int i=0; i<sz_nums; i++) printf("%d, %d\n", nums[i], len[i]);
+		return *max_element(len.begin(), len.end());
+#elif SOLUTION2
+		vector<int> dp;
+		for (int i=0; i<sz_nums; i++) {
+			vector<int>::iterator it = lower_bound(dp.begin(), dp.end(), nums[i]);
+			if (it!=dp.end())
+				*it = nums[i];
+			else
+				dp.push_back(nums[i]);
+		}
+		return dp.size();
+#endif
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums={10, 9, 2, 5, 3, 7, 101, 18};
+	//vector<int> nums={4,10,4,3,8,9};
+	//vector<int> nums={10,9,2,5,3,7,101,18};
+	vector<int> nums={1,3,6,7,9,4,10,5,6};
 	cout << Solution::lengthOfLIS(nums) << endl;
 	return 0;
 }
 #endif
-

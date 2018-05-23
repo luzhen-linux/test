@@ -41,6 +41,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -48,15 +49,43 @@ using namespace std;
 
 class Solution {
 public:
+    static int coinChange(vector<int>& coins, int sz_coins, int used_coins, int &max_coins, int amount) {
+		if (amount==0) {
+			max_coins = min(max_coins, used_coins);
+			return max_coins;
+		}
+		if (amount<0)
+			return -1;
+		if (sz_coins<=0)
+			return 0;
+		if (used_coins>=max_coins)
+			return -2;
+		int max_last=min(amount/coins[sz_coins-1], max_coins-used_coins);
+		for (int i=max_last; i>=0; i--) {
+			int ret = coinChange(coins, sz_coins-1, used_coins+i, max_coins, amount-i*coins[sz_coins-1]);
+			if (ret<0)
+				break;
+		}
+		return max_coins;
+	}
     static int coinChange(vector<int>& coins, int amount) {
+		int sz_coins=coins.size();
+		if (!sz_coins)
+			return -1;
+		sort (coins.begin(), coins.end());
+		int max_coins=INT_MAX;
+		int ret = coinChange(coins, sz_coins, 0, max_coins, amount);
+		return ret==INT_MAX?-1:max_coins;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> coins = {1, 2, 5};
-	int amount = 11;
+	//vector<int> coins = {1, 2, 5}; int amount = 11;
+	//vector<int> coins = {1}; int amount = 1;
+	//vector<int> coins = {1,2,5,10}; int amount = 27;
+	vector<int> coins = {139,442,147,461,244,225,28,378,371}; int amount = 9914;
     cout << Solution::coinChange(coins, amount) << endl;
 	return 0;
 }

@@ -41,6 +41,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <queue>
 #include <algorithm>
 #include <iostream>
 
@@ -49,6 +50,7 @@ using namespace std;
 #endif
 
 class MedianFinder {
+	priority_queue<int> small, large;
 public:
     /** initialize your data structure here. */
     MedianFinder() {
@@ -56,11 +58,19 @@ public:
     }
     
     void addNum(int num) {
-        
+		small.push(num);
+		large.push(-small.top());
+		small.pop();
+		if (small.size()<large.size()) {
+			small.push(-large.top());
+			large.pop();
+		}
     }
     
     double findMedian() {
-        
+		if (small.size()==large.size())
+			return ((double)small.top()-(double)large.top())/2;
+		return small.top();
     }
 };
 
@@ -76,7 +86,10 @@ int main()
 {
 	MedianFinder obj{};
 	obj.addNum(2);
+	obj.addNum(1);
+	obj.addNum(3);
 	double param_2 = obj.findMedian();
+	cout << param_2 << endl;
 	return 0;
 }
 #endif

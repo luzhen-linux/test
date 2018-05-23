@@ -50,6 +50,16 @@ using namespace std;
 class Solution {
 public:
     static bool increasingTriplet(vector<int>& nums) {
+		vector <int> dp;
+		vector <int>::iterator it;
+		for (auto n: nums) {
+			it = lower_bound(dp.begin(), dp.end(), n);
+			if (it==dp.end())
+				dp.push_back(n);
+			else
+				*it = n;
+		}
+		return dp.size()>=3;
     }
 };
 

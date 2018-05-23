@@ -46,6 +46,20 @@ using namespace std;
 class Solution {
 public:
     static int triangleNumber(vector<int>& nums) {
+		int sz_nums=nums.size(), count=0;
+		sort(nums.begin(), nums.end());
+		for (int i=0; i<sz_nums-2; i++) {
+			for (int j=i+1; j<sz_nums-1; j++) {
+				for (int k=j+1; k<sz_nums; k++) {
+					if (nums[k]<nums[i]+nums[j]) {
+						count++;
+					}
+					else
+						break;
+				}
+			}
+		}
+		return count;
     }
 };
 

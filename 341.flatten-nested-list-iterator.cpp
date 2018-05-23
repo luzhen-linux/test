@@ -50,6 +50,7 @@
 #ifdef TEST
 #include <unordered_map>
 #include <map>
+#include <stack>
 #include <algorithm>
 #include <iostream>
 
@@ -66,31 +67,54 @@ class NestedInteger {
 			list = nlist;
 		}
 		// Return true if this NestedInteger holds a single integer, rather than a nested list.
-		bool isInteger() const;
+		bool isInteger() {
+		}
 
 		// Return the single integer that this NestedInteger holds, if it holds a single integer
 		// The result is undefined if this NestedInteger holds a nested list
-		int getInteger() const;
+		int getInteger() {
+		}
 
 		// Return the nested list that this NestedInteger holds, if it holds a nested list
 		// The result is undefined if this NestedInteger holds a single integer
-		const vector<NestedInteger> &getList() const;
+		const vector<NestedInteger> &getList() {
+		}
 };
 #endif
 
 class NestedIterator {
-public:
-    NestedIterator(vector<NestedInteger> &nestedList) {
-        
-    }
-
-    int next() {
-        
-    }
-
-    bool hasNext() {
-        
-    }
+	public:
+		NestedIterator(vector<NestedInteger> &nestedList) {
+			// put them in the stack reverse, since FILO
+			for (int i = nestedList.size()-1; i >= 0; i--) {
+				Stack.push(nestedList[i]);
+			}
+		}
+		int next() {
+			// since hasNext has flattened the list to guarantee at least 1 integer next
+			int num = Stack.top().getInteger();
+			Stack.pop();
+			return num;
+		}
+		bool hasNext() {
+			// check Int and flatten list until an int is found
+			while(!Stack.empty()) {
+				// if top is int then we have next
+				if(Stack.top().isInteger()) 
+					return true;
+				// otherwise we take the list 
+				// and flatten it then put it back in
+				vector<NestedInteger> nestedList = Stack.top().getList();
+				Stack.pop();
+				// same process as in constructor
+				for (int i = nestedList.size()-1; i >= 0; i--) {
+					Stack.push(nestedList[i]);
+				}
+			}
+			return false;
+		}
+	private:
+		stack<NestedInteger> Stack;
 };
 
 /**
@@ -102,7 +126,7 @@ public:
 #ifdef TEST
 int main()
 {
-	vector<NestedInteger> nestedList; //={{1,1}, 2, {1,1}};
+	vector<NestedInteger> nestedList; //{{1,1}, 2, {1,1}};
 	NestedIterator i(nestedList);
 	while (i.hasNext()) cout << i.next();
 	return 0;

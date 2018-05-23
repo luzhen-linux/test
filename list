@@ -75,6 +75,7 @@
   213.house-robber-ii.cpp
   215.kth-largest-element-in-an-array.cpp
   217.contains-duplicate.cpp
+* 218.the-skyline-problem.cpp
   224.basic-calculator.cpp
   227.basic-calculator-ii.cpp
   230.kth-smallest-element-in-a-bst.cpp
@@ -85,34 +86,29 @@
   239.sliding-window-maximum.cpp
   287.find-the-duplicate-number.cpp
 + 289.game-of-life.cpp
-
-================= 4 ====================
-
-  218.the-skyline-problem.cpp
-
-================= 5 ====================
-
-  295.find-median-from-data-stream.cpp
+# 295.find-median-from-data-stream.cpp
   300.longest-increasing-subsequence.cpp
-  315.count-of-smaller-numbers-after-self.cpp
   322.coin-change.cpp
-  324.wiggle-sort-ii.cpp
-  329.longest-increasing-path-in-a-matrix.cpp
+# 324.wiggle-sort-ii.cpp
+* 329.longest-increasing-path-in-a-matrix.cpp
   334.increasing-triplet-subsequence.cpp
   341.flatten-nested-list-iterator.cpp
-  344.reverse-string.cpp
+- 344.reverse-string.cpp
   347.top-k-frequent-elements.cpp
   350.intersection-of-two-arrays-ii.cpp
-  371.sum-of-two-integers.cpp
-  378.kth-smallest-element-in-a-sorted-matrix.cpp
-  380.insert-delete-getrandom-o1.cpp
-  382.linked-list-random-node.cpp
-  384.shuffle-an-array.cpp
+- 371.sum-of-two-integers.cpp
+# 378.kth-smallest-element-in-a-sorted-matrix.cpp
+# 380.insert-delete-getrandom-o1.cpp
+# 382.linked-list-random-node.cpp
+# 384.shuffle-an-array.cpp
   387.first-unique-character-in-a-string.cpp
-  395.longest-substring-with-at-least-k-repeating-characters.cpp
-  398.random-pick-index.cpp
+x 395.longest-substring-with-at-least-k-repeating-characters.cpp
+# 398.random-pick-index.cpp
   412.fizz-buzz.cpp
-  454.4sum-ii.cpp
+# 454.4sum-ii.cpp
   592.fraction-addition-and-subtraction.cpp
-  611.valid-triangle-number.cpp
++ 611.valid-triangle-number.cpp
   697.degree-of-an-array.cpp
+================= 5 ====================
+
+  315.count-of-smaller-numbers-after-self.cpp

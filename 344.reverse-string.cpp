@@ -30,7 +30,11 @@ using namespace std;
 class Solution {
 public:
     static string reverseString(string s) {
-        
+		int sz_s = s.size();
+		string ret;
+		for (int i=sz_s-1; i>=0; --i)
+			ret += s[i];
+		return ret;
     }
 };
 

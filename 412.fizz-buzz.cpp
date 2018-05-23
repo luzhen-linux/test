@@ -53,14 +53,27 @@ using namespace std;
 
 class Solution {
 public:
-    static vector<string> fizzBuzz(int n) {
-    }
+	static vector<string> fizzBuzz(int n) {
+		vector<string> repl{"Fizz", "Buzz", "FizzBuzz"};
+		vector<string> ret;
+		for (int i=1; i<=n; i++) {
+			if (i%15==0)
+				ret.push_back(repl[2]);
+			else if (i%5==0)
+				ret.push_back(repl[1]);
+			else if (i%3==0)
+				ret.push_back(repl[0]);
+			else
+				ret.push_back(to_string(i));
+		}
+		return ret;
+	}
 };
 
 #ifdef TEST
 int main()
 {
-	vector<string> ret = Solution::fizzBuzz(15);
+	vector<string> ret = Solution::fizzBuzz(20);
 	for (auto s:ret)
 		cout << s << endl;
 	return 0;

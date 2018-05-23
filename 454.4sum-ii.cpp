@@ -46,9 +46,19 @@ using namespace std;
 
 class Solution {
 public:
-    static int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {
-        
-    }
+	static int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {
+		unordered_map<int, int> hash1, hash2;  
+		int ans = 0;  
+		for(int i = 0; i < A.size(); i++)  
+			for(int j = 0; j < B.size(); j++)  
+				hash1[A[i]+B[j]]++;  
+		for(int i = 0; i < C.size(); i++)  
+		{  
+			for(int j = 0; j < D.size(); j++)  
+				ans += hash1.count(-C[i] - D[j])? hash1[-C[i] - D[j]]: 0;  
+		}  
+		return ans;  
+	}
 };
 
 #ifdef TEST

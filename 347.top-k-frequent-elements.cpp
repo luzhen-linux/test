@@ -36,7 +36,17 @@ using namespace std;
 class Solution {
 public:
     static vector<int> topKFrequent(vector<int>& nums, int k) {
-        
+		unordered_map<int, int> count;
+		for (auto n: nums)
+			count[n]++;
+		vector<pair<int,int>> res;
+		for (auto one:count) 
+			res.push_back({one.first,one.second});
+		sort(res.begin(), res.end(), [](pair<int,int> i, pair<int,int> j){return i.second>j.second;});
+		vector<int> ret;
+		for (int i=0; i<k; i++)
+			ret.push_back(res[i].first);
+		return ret;
     }
 };
 

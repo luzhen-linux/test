@@ -47,18 +47,29 @@ using namespace std;
 
 class Solution {
 public:
-    static void wiggleSort(vector<int>& nums) {
-    }
+	static void wiggleSort(vector<int>& nums) {
+		nth_element(nums.begin(), nums.begin()+nums.size()/2, nums.end());  
+		int len=nums.size(), low=0, high=len-1, mid =nums[len/2], i=0;  
+		auto index = [=](int pos){ return (1+pos*2)%(len|1); };  
+		//for (auto n:nums) cout << n << ", "; cout << endl;
+		while(i <= high)  
+		{  
+			//printf("%d,%d  %d,%d, %d,%d\n", i, index(i), low, high, nums[index(i)], mid);
+			if(nums[index(i)] > mid) swap(nums[index(i++)], nums[index(low++)]);  
+			else if(nums[index(i)]<mid) swap(nums[index(i)],nums[index(high--)]);  
+			else i++;  
+			//for (auto n:nums) cout << n << ", "; cout << endl;
+		} 
+	}
 };
 
 #ifdef TEST
 int main()
 {
 	vector<int> nums={1, 5, 1, 1, 6, 4};
+	for (auto n:nums) cout << n << ", "; cout << endl;
 	Solution::wiggleSort(nums);
-	for (auto n:nums)
-		cout << n << ", ";
-	cout << endl;
+	for (auto n:nums) cout << n << ", "; cout << endl;
 	return 0;
 }
 #endif

@@ -53,15 +53,44 @@ using namespace std;
 class Solution {
 public:
     static int longestSubstring(string s, int k) {
-    }
+		if (s.size()<k)
+			return -1;
+		unordered_map<char, int> count;
+		for (auto c:s)
+			count[c]++;
+		int any=0;
+		for (auto each: count)
+			if (each.second>=k)
+				count[each.first] = 0;
+			else
+				any=1;
+		if (!any)
+			return s.size();
+		int sz_s=s.size(), maxval=-1, start=0, cont=0, len;
+		for (int i=0; i<sz_s; i++) {
+			if (count[s[i]]) {
+				len = i-start;
+				cont=0;
+				if (len>=k)
+					maxval = max(maxval, longestSubstring(s.substr(start, len), k));
+				start=i;
+			}
+			else
+				cont++;
+		}
+		len = sz_s-start;
+		if (len>=k)
+			maxval = max(maxval, longestSubstring(s.substr(start, len), k));
+		return maxval;
+	}
 };
 
 #ifdef TEST
 int main()
 {
-	string s = "ababbc";
-	int k = 2;
-	cout << Solution::longestSubstring(s, k);
+	string s = "bbaaacbd";
+	int k = 3;
+	cout << Solution::longestSubstring(s, k) << endl;
 	return 0;
 }
 #endif

@@ -44,6 +44,21 @@ using namespace std;
 class Solution {
 public:
     static vector<int> countSmaller(vector<int>& nums) {
+		int sz_nums=nums.size();
+		vector<int> ret(sz_nums);
+		for (int i=sz_nums-1; i>=0; i--) {
+			for (int j=i+1; j<sz_nums; j++)
+				if (nums[i]>nums[j]) {
+					ret[i] = ret[j]+1;
+					for (int k=j+1; k<sz_nums; k++)
+						if (nums[k]>=nums[j] && nums[k]<nums[i])
+							ret[i]++;
+						else
+							break;
+					break;
+				}
+		}
+		return ret;
     }
 };
 

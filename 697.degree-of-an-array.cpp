@@ -45,6 +45,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -53,13 +54,40 @@ using namespace std;
 class Solution {
 public:
     static int findShortestSubArray(vector<int>& nums) {
+		unordered_map<int, int> count;
+		vector<int> dup;
+		int max=0, val, sz_nums=nums.size();
+		for (auto i:nums) {
+			count[i]++;
+			if (max<count[i]) {
+				max=count[i];
+				val=i;
+				dup.clear();
+			}
+			else if (max==count[i]) {
+				dup.push_back(i);
+			}
+		}
+		dup.push_back(val);
+		int degree=INT_MAX;
+		for (auto one:dup) {
+			int start, end;
+			for (start=0; start<sz_nums; start++)
+				if (nums[start]==one)
+					break;
+			for (end=sz_nums-1; end>=start; end--)
+				if (nums[end]==one)
+					break;
+			degree = min(degree, end-start+1);
+		}
+		return degree;
     }
 };
 
 #ifdef TEST
 int main()
 {
-	vector<int> nums={1, 2, 2, 3, 1};
+	vector<int> nums={2,1,1,2,1,3,3,3,1,3,1,3,2};
 	//vector<int> nums={1,2,2,3,1,4,2};
 	cout << Solution::findShortestSubArray(nums) << endl;
 	return 0;
